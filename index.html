@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>RTR Parlay Tracker</title>
+<meta name="description" content="Rags to Riches group parlay standings for the 2026–27 NBA season.">
+<meta name="theme-color" content="#13261f">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+:root{
+  --bg:#eef1f0; --surface:#ffffff; --sunk:#e3e8e6; --line:#cfd7d4;
+  --fg:#14201c; --muted:#5d6b66; --accent:#0f7b5f; --gold:#b9860b;
+  --hit:#178a4a; --hit-bg:#dcf3e5; --miss:#c4352b; --miss-bg:#fbe2df;
+  --pend:#6b6f7a; --pend-bg:#e9eaee; --void-bg:#efe9db;
+  --band:#13261f; --band-fg:#f1f5f3; --band-muted:#9fb3ab;
+  --f-display:"Anton","Oswald","Impact",sans-serif;
+  --f-body:"Barlow","Helvetica Neue",Arial,sans-serif;
+  --f-num:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#0d1714; --surface:#15221e; --sunk:#1b2b26; --line:#2a3d37;
+  --fg:#e7efec; --muted:#93a59f; --accent:#2fbf93; --gold:#e3b23c;
+  --hit:#4fd18a; --hit-bg:#173a28; --miss:#ff7a6e; --miss-bg:#3d1c19;
+  --pend:#a3a8b5; --pend-bg:#262b33; --void-bg:#33301f;
+  --band:#08110e; --band-fg:#eef4f1; --band-muted:#87a097; color-scheme:dark}}
+*{box-sizing:border-box}
+html{padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:15px;line-height:1.45;padding-bottom:env(safe-area-inset-bottom,0px)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--band)}
+.wrap{max-width:760px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.num{font-family:var(--f-num);font-variant-numeric:tabular-nums}
+[hidden]{display:none!important}
+.band{background:var(--band);color:var(--band-fg);position:sticky;top:env(safe-area-inset-top,0px);z-index:5}
+.band .wrap{padding-block:14px 0}
+.brand{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.brand h1{font-family:var(--f-display);font-weight:400;font-size:30px;letter-spacing:.02em;margin:0;line-height:1}
+.brand h1 span{color:var(--gold)}
+.brand small{color:var(--band-muted);font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+.board{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin-top:12px;background:#ffffff14;border-radius:8px;overflow:hidden}
+.board div{background:var(--band);padding:8px 10px;min-width:0}
+.board b{display:block;font-family:var(--f-num);font-size:18px;font-weight:600;white-space:nowrap}
+.board span{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--band-muted)}
+.pos{color:#5fe0a0}.neg{color:#ff8d82}
+.tabs{display:flex;gap:2px;margin-top:12px}
+.tabs button{all:unset;cursor:pointer;padding:10px 11px 11px;font-weight:600;font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:var(--band-muted);border-bottom:3px solid transparent}
+.tabs button[aria-selected="true"]{color:var(--band-fg);border-color:var(--gold)}
+.tabs button:focus-visible{outline:2px solid var(--gold);outline-offset:-2px}
+main .wrap{padding-block:18px 48px;display:grid;gap:18px}
+h2{font-family:var(--f-display);font-weight:400;font-size:22px;letter-spacing:.03em;margin:0}
+.eyebrow{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:10px}
+.note{color:var(--muted);font-size:13.5px}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:space-between}
+.leaders{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.leader{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px;min-width:0}
+.leader .who{font-weight:700;font-size:17px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.leader .what{font-family:var(--f-num);font-size:13px;color:var(--muted)}
+.stand{overflow:hidden}
+.srow{display:grid;grid-template-columns:28px minmax(0,1fr) 62px 56px 54px;gap:8px;align-items:center;padding:10px 12px;border-top:1px solid var(--line)}
+.srow:first-child{border-top:0}
+.srow.head{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600;padding-block:8px;background:var(--sunk)}
+.srow .rk{font-family:var(--f-display);font-size:20px;color:var(--muted)}
+.srow:nth-child(2) .rk{color:var(--gold)}
+.srow .nm{font-weight:700;font-size:16px;min-width:0}
+.srow .sub{display:flex;gap:10px;flex-wrap:wrap;font-size:12px;color:var(--muted);font-weight:500;margin-top:2px}
+.srow .r{text-align:right}
+.form{display:inline-flex;gap:3px;vertical-align:middle}
+.form i{width:8px;height:8px;border-radius:50%;background:var(--pend-bg);display:inline-block}
+.form i.h{background:var(--hit)}.form i.m{background:var(--miss)}
+.stk{display:inline-block;font-family:var(--f-num);font-weight:600;font-size:13px;padding:2px 7px;border-radius:5px;min-width:36px;text-align:center}
+.stk.w{background:var(--hit-bg);color:var(--hit)}.stk.l{background:var(--miss-bg);color:var(--miss)}.stk.z{background:var(--pend-bg);color:var(--pend)}
+.stack{display:grid;gap:12px}
+.slip{overflow:hidden}
+.slip-h{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;padding:12px 14px;border-bottom:1px dashed var(--line);flex-wrap:wrap}
+.slip-h .t{font-family:var(--f-display);font-size:20px;letter-spacing:.02em;line-height:1.1}
+.slip-h .m{font-size:13px;color:var(--muted)}
+.pill{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:4px 9px;border-radius:999px;white-space:nowrap}
+.pill.won{background:var(--hit-bg);color:var(--hit)}.pill.lost{background:var(--miss-bg);color:var(--miss)}.pill.live{background:var(--pend-bg);color:var(--pend)}
+.leg{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;padding:10px 14px;border-top:1px solid var(--line)}
+.leg:first-of-type{border-top:0}
+.leg .who{font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--accent)}
+.leg .pk{font-weight:600}
+.leg .gm{font-size:12.5px;color:var(--muted)}
+.res{font-weight:700;font-size:12px;letter-spacing:.1em;text-transform:uppercase;padding:7px 10px;border-radius:6px;min-width:58px;text-align:center}
+.res.hit{background:var(--hit-bg);color:var(--hit)}.res.miss{background:var(--miss-bg);color:var(--miss)}
+.res.pending{background:var(--pend-bg);color:var(--pend)}.res.void{background:var(--void-bg);color:var(--muted)}
+.slip-f{padding:10px 14px;background:var(--sunk);font-size:13px;color:var(--muted)}
+.empty{padding:28px 18px;text-align:center;color:var(--muted)}
+@media (max-width:420px){
+  .board b{font-size:15px}
+  .srow{grid-template-columns:22px minmax(0,1fr) 54px 48px 46px;gap:6px;padding-inline:10px}
+}
+</style>
+</head>
+<body>
+<header class="band">
+  <div class="wrap">
+    <div class="brand"><h1>RAGS <span>TO</span> RICHES</h1><small>2026–27 NBA season</small></div>
+    <div class="board" aria-label="Group parlay record">
+      <div><b id="b-rec" class="num">0–0</b><span>Parlays</span></div>
+      <div><b id="b-legs" class="num">—</b><span>Leg hit rate</span></div>
+      <div><b id="b-net" class="num">$0</b><span>Net</span></div>
+      <div><b id="b-pot" class="num">$0</b><span>Could've won</span></div>
+    </div>
+    <nav class="tabs" role="tablist">
+      <button role="tab" data-tab="standings" aria-selected="true">Standings</button>
+      <button role="tab" data-tab="slips" aria-selected="false">Slips</button>
+    </nav>
+  </div>
+</header>
+<main>
+  <section class="wrap" data-view="standings">
+    <div class="leaders" id="leaders"></div>
+    <div>
+      <div class="row" style="margin-bottom:8px"><h2>Standings</h2><span class="eyebrow">Ranked by hit rate</span></div>
+      <div class="panel stand" id="standings"><div class="empty">Loading…</div></div>
+      <p class="note">Streak shows W for consecutive hits, L for consecutive misses. Sole bust counts slips where you were the only leg that missed.</p>
+    </div>
+    <p class="note" id="updated"></p>
+  </section>
+  <section class="wrap" data-view="slips" hidden>
+    <div class="row"><h2>Slips</h2><span class="eyebrow" id="slipCount"></span></div>
+    <div id="slips" class="stack"></div>
+  </section>
+</main>
+<script>
+(async function(){
+  const $=s=>document.querySelector(s);
+  const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  const money=n=>(n<0?"-":"")+"$"+Math.abs(n).toFixed(2).replace(/\.00$/,"");
+  const fmtDate=d=>{try{return new Date(d+"T12:00:00").toLocaleDateString(undefined,{weekday:"short",month:"short",day:"numeric"})}catch(e){return d}};
+  const views=["standings","slips"];
+  function show(v){ if(!views.includes(v)) v="standings";
+    document.querySelectorAll("[data-view]").forEach(s=>s.hidden=s.dataset.view!==v);
+    document.querySelectorAll("[data-tab]").forEach(b=>b.setAttribute("aria-selected",b.dataset.tab===v)); }
+  document.querySelectorAll("[data-tab]").forEach(b=>b.onclick=()=>{ show(b.dataset.tab); history.replaceState(null,"","#"+b.dataset.tab); window.scrollTo(0,0); });
+  show(location.hash.slice(1));
+
+  let data;
+  try{ data = await (await fetch("data.json?v="+Date.now(),{cache:"no-store"})).json(); }
+  catch(e){ $("#standings").innerHTML=`<div class="empty">Couldn't load the standings. Refresh to try again.</div>`; return; }
+  const members=data.members||[], slips=data.slips||[];
+  const nameOf=id=>(members.find(m=>m.id===id)||{}).name||id;
+  const status=p=>{const l=p.legs||[]; if(l.some(x=>x.result==="miss")) return "lost"; if(l.length&&l.every(x=>x.result==="hit"||x.result==="void")) return "won"; return "live";};
+
+  const sorted=[...slips].sort((a,b)=>(a.date||"").localeCompare(b.date||""));
+  const st={}; members.forEach(m=>st[m.id]={name:m.name,hits:0,misses:0,pending:0,seq:[],soleBust:0});
+  let won=0,lost=0,staked=0,ret=0,lh=0,lm=0,pot=0;
+  for(const p of sorted){
+    const s=status(p); pot+=Number(p.payout)||0;
+    if(s==="won"){won++;ret+=Number(p.payout)||0} if(s==="lost") lost++; if(s!=="live") staked+=Number(p.stake)||0;
+    const misses=(p.legs||[]).filter(l=>l.result==="miss").length;
+    for(const l of p.legs||[]){ const r=st[l.member]; if(!r) continue;
+      if(l.result==="hit"){r.hits++;r.seq.push("h");lh++} else if(l.result==="miss"){r.misses++;r.seq.push("m");lm++; if(misses===1) r.soleBust++} else if(l.result==="pending") r.pending++; }
+  }
+  const rows=Object.values(st).map(r=>{ let run=0,best=0; for(const x of r.seq){run=x==="h"?run+1:0;best=Math.max(best,run)}
+    let cur=0; const last=r.seq[r.seq.length-1]; for(let i=r.seq.length-1;i>=0&&r.seq[i]===last;i--) cur++;
+    const dec=r.hits+r.misses; return {...r,best,streak:last==="h"?cur:last==="m"?-cur:0,rate:dec?r.hits/dec:null,form:r.seq.slice(-5)}; })
+    .sort((a,b)=>((b.rate??-1)-(a.rate??-1))||(b.hits-a.hits)||(a.misses-b.misses)||a.name.localeCompare(b.name));
+
+  $("#b-rec").textContent=`${won}–${lost}`;
+  $("#b-legs").textContent=(lh+lm)?Math.round(100*lh/(lh+lm))+"%":"—";
+  const net=ret-staked, nb=$("#b-net"); nb.textContent=(net>0?"+":"")+money(net); nb.className="num "+(net>0?"pos":net<0?"neg":"");
+  $("#b-pot").textContent = pot>=10000 ? "$"+(pot/1000).toFixed(1)+"k" : "$"+Math.round(pot).toLocaleString();
+
+  const stk=r=>r.streak>0?`<span class="stk w">W${r.streak}</span>`:r.streak<0?`<span class="stk l">L${-r.streak}</span>`:`<span class="stk z">–</span>`;
+  const form=r=>`<span class="form" aria-label="Last five">${Array.from({length:5},(_,i)=>`<i class="${r.form[r.form.length-5+i]||""}"></i>`).join("")}</span>`;
+  $("#standings").innerHTML=`<div class="srow head"><span>#</span><span>Name</span><span class="r">W–L</span><span class="r">Hit%</span><span class="r">Strk</span></div>`+
+    rows.map((r,i)=>`<div class="srow"><span class="rk">${i+1}</span><div class="nm">${esc(r.name)} ${form(r)}<div class="sub"><span>Best W${r.best}</span><span>Sole bust ${r.soleBust}</span>${r.pending?`<span>${r.pending} live</span>`:""}</div></div>
+      <span class="r num">${r.hits}–${r.misses}</span><span class="r num">${r.rate==null?"—":Math.round(r.rate*100)+"%"}</span><span class="r">${stk(r)}</span></div>`).join("");
+
+  const dec=rows.filter(r=>r.hits+r.misses>0), pick=(a,f)=>a.length?a.reduce((x,y)=>f(y)>f(x)?y:x):null;
+  const L=(lbl,r,t)=>`<div class="leader"><div class="eyebrow">${lbl}</div><div class="who">${r?esc(r.name):"—"}</div><div class="what">${r?t(r):"Waiting on results"}</div></div>`;
+  $("#leaders").innerHTML=L("On fire",pick(dec.filter(r=>r.streak>0),r=>r.streak),r=>`${r.streak} straight hits`)+L("Ice cold",pick(dec.filter(r=>r.streak<0),r=>-r.streak),r=>`${-r.streak} straight misses`)+
+    L("Sharpest (3+ picks)",pick(dec.filter(r=>r.hits+r.misses>=3),r=>r.rate),r=>`${Math.round(r.rate*100)}% · ${r.hits}–${r.misses}`)+L("Parlay killer",pick(dec.filter(r=>r.soleBust>0),r=>r.soleBust),r=>`Sole bust ×${r.soleBust}`);
+
+  const rev=[...slips].sort((a,b)=>(b.date||"").localeCompare(a.date||""));
+  $("#slipCount").textContent=`${slips.length} slip${slips.length===1?"":"s"}`;
+  $("#slips").innerHTML=rev.map(p=>{const s=status(p),legs=p.legs||[],h=legs.filter(l=>l.result==="hit").length;
+    return `<article class="panel slip"><div class="slip-h"><div><div class="t">${esc(fmtDate(p.date))}</div><div class="m">${legs.length}-leg · ${h}/${legs.length} hit</div></div><span class="pill ${s}">${s==="won"?"Cashed":s==="lost"?"Busted":"Live"}</span></div>
+    ${legs.map(l=>`<div class="leg"><div style="min-width:0"><div class="who">${esc(nameOf(l.member))}</div><div class="pk">${esc(l.pick)}${l.odds?` <span class="num gm">${esc(l.odds)}</span>`:""}</div>${l.game?`<div class="gm">${esc(l.game)}</div>`:""}</div><span class="res ${esc(l.result)}">${l.result==="pending"?"Live":esc(l.result)}</span></div>`).join("")}
+    <div class="slip-f num">${money(Number(p.stake)||0)} to win ${money(Number(p.payout)||0)}</div></article>`}).join("")||`<div class="panel empty">No slips yet.</div>`;
+  if(data.updated){ try{ $("#updated").textContent="Last updated "+new Date(data.updated).toLocaleString(undefined,{weekday:"short",month:"short",day:"numeric",hour:"numeric",minute:"2-digit"}); }catch(e){} }
+})();
+</script>
+</body>
+</html>

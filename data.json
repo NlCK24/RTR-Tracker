@@ -1,0 +1,103 @@
+{
+ "updated": "2026-10-21T19:00:00-05:00",
+ "members": [
+  {
+   "id": "nick",
+   "name": "Nick"
+  },
+  {
+   "id": "sow",
+   "name": "Sow"
+  },
+  {
+   "id": "aj",
+   "name": "AJ"
+  },
+  {
+   "id": "yin",
+   "name": "Yin"
+  },
+  {
+   "id": "henry",
+   "name": "Henry"
+  },
+  {
+   "id": "chris",
+   "name": "Chris"
+  },
+  {
+   "id": "beez",
+   "name": "Beez"
+  },
+  {
+   "id": "marco",
+   "name": "Marco"
+  }
+ ],
+ "slips": [
+  {
+   "id": "2026-10-21",
+   "date": "2026-10-21",
+   "stake": 5,
+   "payout": 272.51,
+   "legs": [
+    {
+     "member": "sow",
+     "pick": "Ivica Zubac double-double",
+     "odds": "",
+     "game": "Indiana Pacers",
+     "result": "pending"
+    },
+    {
+     "member": "aj",
+     "pick": "Indiana Pacers ML",
+     "odds": "",
+     "game": "",
+     "result": "pending"
+    },
+    {
+     "member": "nick",
+     "pick": "Luka Doncic 4+ made threes",
+     "odds": "SGP +202",
+     "game": "Warriors @ Lakers · 10:00 PM ET",
+     "result": "pending"
+    },
+    {
+     "member": "yin",
+     "pick": "Stephen Curry 25+ points",
+     "odds": "SGP +202",
+     "game": "Warriors @ Lakers · 10:00 PM ET",
+     "result": "pending"
+    },
+    {
+     "member": "henry",
+     "pick": "Washington Wizards ML",
+     "odds": "-176",
+     "game": "Bucks @ Wizards · 7:10 PM ET",
+     "result": "pending"
+    },
+    {
+     "member": "chris",
+     "pick": "Jalen Johnson under 7.5 assists",
+     "odds": "-154",
+     "game": "Hawks @ Magic · 7:10 PM ET",
+     "result": "pending"
+    },
+    {
+     "member": "beez",
+     "pick": "LaMelo Ball 8+ assists",
+     "odds": "-146",
+     "game": "Timberwolves @ Heat · 7:30 PM ET",
+     "result": "pending"
+    },
+    {
+     "member": "marco",
+     "pick": "Kyrie Irving 20+ points",
+     "odds": "-128",
+     "game": "Mavericks @ Rockets · 8:40 PM ET",
+     "result": "pending"
+    }
+   ]
+  }
+ ]
+}
