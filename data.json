@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-21T19:00:00-05:00",
+ "updated": "2026-10-21T22:45:00-05:00",
  "members": [
   {
    "id": "nick",
@@ -46,14 +46,14 @@
      "pick": "Ivica Zubac double-double",
      "odds": "",
      "game": "Indiana Pacers",
-     "result": "pending"
+     "result": "hit"
     },
     {
      "member": "aj",
      "pick": "Indiana Pacers ML",
      "odds": "",
      "game": "",
-     "result": "pending"
+     "result": "hit"
     },
     {
      "member": "nick",
@@ -74,21 +74,21 @@
      "pick": "Washington Wizards ML",
      "odds": "-176",
      "game": "Bucks @ Wizards · 7:10 PM ET",
-     "result": "pending"
+     "result": "hit"
     },
     {
      "member": "chris",
      "pick": "Jalen Johnson under 7.5 assists",
      "odds": "-154",
      "game": "Hawks @ Magic · 7:10 PM ET",
-     "result": "pending"
+     "result": "hit"
     },
     {
      "member": "beez",
      "pick": "LaMelo Ball 8+ assists",
      "odds": "-146",
      "game": "Timberwolves @ Heat · 7:30 PM ET",
-     "result": "pending"
+     "result": "miss"
     },
     {
      "member": "marco",
