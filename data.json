@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-21T22:45:00-05:00",
+ "updated": "2026-10-21T23:00:00-05:00",
  "members": [
   {
    "id": "nick",
@@ -95,7 +95,7 @@
      "pick": "Kyrie Irving 20+ points",
      "odds": "-128",
      "game": "Mavericks @ Rockets · 8:40 PM ET",
-     "result": "pending"
+     "result": "miss"
     }
    ]
   }
