@@ -89,6 +89,9 @@ h2{font-family:var(--f-display);font-weight:400;font-size:22px;letter-spacing:.0
 .res.pending{background:var(--pend-bg);color:var(--pend)}.res.void{background:var(--void-bg);color:var(--muted)}
 .slip-f{padding:10px 14px;background:var(--sunk);font-size:13px;color:var(--muted)}
 .empty{padding:28px 18px;text-align:center;color:var(--muted)}
+.rules{padding:14px;display:grid;gap:8px}
+.rules ol{margin:0;padding-left:20px;display:grid;gap:4px;font-weight:500}
+.flag{font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--miss);background:var(--miss-bg);padding:2px 6px;border-radius:4px;margin-left:6px;white-space:nowrap}
 @media (max-width:420px){
   .board b{font-size:15px}
   .srow{grid-template-columns:22px minmax(0,1fr) 54px 48px 46px;gap:6px;padding-inline:10px}
@@ -119,6 +122,7 @@ h2{font-family:var(--f-display);font-weight:400;font-size:22px;letter-spacing:.0
       <div class="panel stand" id="standings"><div class="empty">Loading…</div></div>
       <p class="note">Streak shows W for consecutive hits, L for consecutive misses. Sole bust counts slips where you were the only leg that missed.</p>
     </div>
+    <div class="panel rules" id="rulesBox" hidden><h2>League rules</h2><ol id="rules"></ol></div>
     <p class="note" id="updated"></p>
   </section>
   <section class="wrap" data-view="slips" hidden>
@@ -142,7 +146,9 @@ h2{font-family:var(--f-display);font-weight:400;font-size:22px;letter-spacing:.0
   let data;
   try{ data = await (await fetch("data.json?v="+Date.now(),{cache:"no-store"})).json(); }
   catch(e){ $("#standings").innerHTML=`<div class="empty">Couldn't load the standings. Refresh to try again.</div>`; return; }
-  const members=data.members||[], slips=data.slips||[];
+  const members=data.members||[], slips=data.slips||[], rules=data.rules||[];
+  if(rules.length){ $("#rules").innerHTML=rules.map(r=>`<li>${esc(r)}</li>`).join(""); $("#rulesBox").hidden=false; }
+  const outOfRange=o=>{ const m=String(o||"").trim().match(/^([+-]\d+)$/); if(!m) return false; const n=+m[1]; return n<-250||n>250; };
   const nameOf=id=>(members.find(m=>m.id===id)||{}).name||id;
   const status=p=>{const l=p.legs||[]; if(l.some(x=>x.result==="miss")) return "lost"; if(l.length&&l.every(x=>x.result==="hit"||x.result==="void")) return "won"; return "live";};
 
@@ -181,7 +187,7 @@ h2{font-family:var(--f-display);font-weight:400;font-size:22px;letter-spacing:.0
   $("#slipCount").textContent=`${slips.length} slip${slips.length===1?"":"s"}`;
   $("#slips").innerHTML=rev.map(p=>{const s=status(p),legs=p.legs||[],h=legs.filter(l=>l.result==="hit").length;
     return `<article class="panel slip"><div class="slip-h"><div><div class="t">${esc(fmtDate(p.date))}</div><div class="m">${legs.length}-leg · ${h}/${legs.length} hit</div></div><span class="pill ${s}">${s==="won"?"Cashed":s==="lost"?"Busted":"Live"}</span></div>
-    ${legs.map(l=>`<div class="leg"><div style="min-width:0"><div class="who">${esc(nameOf(l.member))}</div><div class="pk">${esc(l.pick)}${l.odds?` <span class="num gm">${esc(l.odds)}</span>`:""}</div>${l.game?`<div class="gm">${esc(l.game)}</div>`:""}</div><span class="res ${esc(l.result)}">${l.result==="pending"?"Live":esc(l.result)}</span></div>`).join("")}
+    ${legs.map(l=>`<div class="leg"><div style="min-width:0"><div class="who">${esc(nameOf(l.member))}</div><div class="pk">${esc(l.pick)}${l.odds?` <span class="num gm">${esc(l.odds)}</span>`:""}${outOfRange(l.odds)?`<span class="flag">Outside -250/+250</span>`:""}</div>${l.game?`<div class="gm">${esc(l.game)}</div>`:""}</div><span class="res ${esc(l.result)}">${l.result==="pending"?"Live":esc(l.result)}</span></div>`).join("")}
     <div class="slip-f num">${money(Number(p.stake)||0)} to win ${money(Number(p.payout)||0)}</div></article>`}).join("")||`<div class="panel empty">No slips yet.</div>`;
   if(data.updated){ try{ $("#updated").textContent="Last updated "+new Date(data.updated).toLocaleString(undefined,{weekday:"short",month:"short",day:"numeric",hour:"numeric",minute:"2-digit"}); }catch(e){} }
 })();
