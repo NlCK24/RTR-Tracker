@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-21T23:00:00-05:00",
+ "updated": "2026-10-22T07:35:16-05:00",
  "rules": [
   "Each pick's odds must be between -250 and +250.",
   "Only nights with at least 5 NBA games count."
@@ -67,7 +67,7 @@
      "pick": "Luka Doncic 4+ made threes",
      "odds": "SGP +202",
      "game": "Warriors @ Lakers · 10:00 PM ET",
-     "result": "pending"
+     "result": "hit"
     },
     {
      "member": "yin",
@@ -75,7 +75,7 @@
      "pick": "Stephen Curry 25+ points",
      "odds": "SGP +202",
      "game": "Warriors @ Lakers · 10:00 PM ET",
-     "result": "pending"
+     "result": "miss"
     },
     {
      "member": "henry",
