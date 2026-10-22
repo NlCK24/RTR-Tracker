@@ -47,6 +47,7 @@
    "legs": [
     {
      "member": "sow",
+     "player": "Ivica Zubac",
      "pick": "Ivica Zubac double-double",
      "odds": "",
      "game": "Indiana Pacers",
@@ -54,6 +55,7 @@
     },
     {
      "member": "aj",
+     "player": "Indiana Pacers",
      "pick": "Indiana Pacers ML",
      "odds": "",
      "game": "",
@@ -61,6 +63,7 @@
     },
     {
      "member": "nick",
+     "player": "Luka Doncic",
      "pick": "Luka Doncic 4+ made threes",
      "odds": "SGP +202",
      "game": "Warriors @ Lakers · 10:00 PM ET",
@@ -68,6 +71,7 @@
     },
     {
      "member": "yin",
+     "player": "Stephen Curry",
      "pick": "Stephen Curry 25+ points",
      "odds": "SGP +202",
      "game": "Warriors @ Lakers · 10:00 PM ET",
@@ -75,6 +79,7 @@
     },
     {
      "member": "henry",
+     "player": "Washington Wizards",
      "pick": "Washington Wizards ML",
      "odds": "-176",
      "game": "Bucks @ Wizards · 7:10 PM ET",
@@ -82,6 +87,7 @@
     },
     {
      "member": "chris",
+     "player": "Jalen Johnson",
      "pick": "Jalen Johnson under 7.5 assists",
      "odds": "-154",
      "game": "Hawks @ Magic · 7:10 PM ET",
@@ -89,6 +95,7 @@
     },
     {
      "member": "beez",
+     "player": "LaMelo Ball",
      "pick": "LaMelo Ball 8+ assists",
      "odds": "-146",
      "game": "Timberwolves @ Heat · 7:30 PM ET",
@@ -96,6 +103,7 @@
     },
     {
      "member": "marco",
+     "player": "Kyrie Irving",
      "pick": "Kyrie Irving 20+ points",
      "odds": "-128",
      "game": "Mavericks @ Rockets · 8:40 PM ET",

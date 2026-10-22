@@ -91,6 +91,17 @@ h2{font-family:var(--f-display);font-weight:400;font-size:22px;letter-spacing:.0
 .empty{padding:28px 18px;text-align:center;color:var(--muted)}
 .rules{padding:14px;display:grid;gap:8px}
 .rules ol{margin:0;padding-left:20px;display:grid;gap:4px;font-weight:500}
+.prow{display:grid;grid-template-columns:minmax(0,1fr) 46px 62px 52px;gap:8px;align-items:center;padding:10px 12px;border-top:1px solid var(--line)}
+.prow:first-child{border-top:0}
+.prow.head{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600;padding-block:8px;background:var(--sunk)}
+.prow .nm{font-weight:700;font-size:16px;min-width:0}
+.prow .sub{font-size:12px;color:var(--muted);font-weight:500;margin-top:2px}
+.prow .r{text-align:right}
+.prow .w{color:var(--hit)}.prow .l{color:var(--miss)}
+.sorts{display:flex;gap:6px;flex-wrap:wrap}
+.sorts button{all:unset;cursor:pointer;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:6px 10px;border-radius:999px;border:1px solid var(--line);color:var(--muted);background:var(--surface)}
+.sorts button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.sorts button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 .flag{font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--miss);background:var(--miss-bg);padding:2px 6px;border-radius:4px;margin-left:6px;white-space:nowrap}
 @media (max-width:420px){
   .board b{font-size:15px}
@@ -110,6 +121,7 @@ h2{font-family:var(--f-display);font-weight:400;font-size:22px;letter-spacing:.0
     </div>
     <nav class="tabs" role="tablist">
       <button role="tab" data-tab="standings" aria-selected="true">Standings</button>
+      <button role="tab" data-tab="players" aria-selected="false">Players</button>
       <button role="tab" data-tab="slips" aria-selected="false">Slips</button>
     </nav>
   </div>
@@ -125,6 +137,11 @@ h2{font-family:var(--f-display);font-weight:400;font-size:22px;letter-spacing:.0
     <div class="panel rules" id="rulesBox" hidden><h2>League rules</h2><ol id="rules"></ol></div>
     <p class="note" id="updated"></p>
   </section>
+  <section class="wrap" data-view="players" hidden>
+    <div class="row"><h2>NBA players &amp; teams</h2><div class="sorts" id="psort"><button type="button" data-s="hits" aria-pressed="true">Most hits</button><button type="button" data-s="misses" aria-pressed="false">Most misses</button><button type="button" data-s="picks" aria-pressed="false">Most picked</button></div></div>
+    <div class="panel stand" id="players"></div>
+    <p class="note">Every player or team the group has picked this season, with how often they came through. Live legs aren't counted until they're graded.</p>
+  </section>
   <section class="wrap" data-view="slips" hidden>
     <div class="row"><h2>Slips</h2><span class="eyebrow" id="slipCount"></span></div>
     <div id="slips" class="stack"></div>
@@ -136,7 +153,7 @@ h2{font-family:var(--f-display);font-weight:400;font-size:22px;letter-spacing:.0
   const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
   const money=n=>(n<0?"-":"")+"$"+Math.abs(n).toFixed(2).replace(/\.00$/,"");
   const fmtDate=d=>{try{return new Date(d+"T12:00:00").toLocaleDateString(undefined,{weekday:"short",month:"short",day:"numeric"})}catch(e){return d}};
-  const views=["standings","slips"];
+  const views=["standings","players","slips"];
   function show(v){ if(!views.includes(v)) v="standings";
     document.querySelectorAll("[data-view]").forEach(s=>s.hidden=s.dataset.view!==v);
     document.querySelectorAll("[data-tab]").forEach(b=>b.setAttribute("aria-selected",b.dataset.tab===v)); }
@@ -182,6 +199,30 @@ h2{font-family:var(--f-display);font-weight:400;font-size:22px;letter-spacing:.0
   const L=(lbl,r,t)=>`<div class="leader"><div class="eyebrow">${lbl}</div><div class="who">${r?esc(r.name):"—"}</div><div class="what">${r?t(r):"Waiting on results"}</div></div>`;
   $("#leaders").innerHTML=L("On fire",pick(dec.filter(r=>r.streak>0),r=>r.streak),r=>`${r.streak} straight hits`)+L("Ice cold",pick(dec.filter(r=>r.streak<0),r=>-r.streak),r=>`${-r.streak} straight misses`)+
     L("Sharpest (3+ picks)",pick(dec.filter(r=>r.hits+r.misses>=3),r=>r.rate),r=>`${Math.round(r.rate*100)}% · ${r.hits}–${r.misses}`)+L("Parlay killer",pick(dec.filter(r=>r.soleBust>0),r=>r.soleBust),r=>`Sole bust ×${r.soleBust}`);
+
+  // players tab
+  const guessPlayer=p=>String(p||"").replace(/\s+(ML|moneyline|under|over|to\b|\d).*$/i,"").trim();
+  const P={};
+  for(const p of sorted) for(const l of p.legs||[]){
+    const name=(l.player||guessPlayer(l.pick)||"Unknown"), k=name.toLowerCase();
+    const r=P[k]||(P[k]={name,hits:0,misses:0,live:0,by:{}});
+    if(l.result==="hit") r.hits++; else if(l.result==="miss") r.misses++; else if(l.result==="pending") r.live++;
+    r.by[l.member]=(r.by[l.member]||0)+1;
+  }
+  const plist=Object.values(P);
+  let psort="hits";
+  function renderPlayers(){
+    const f={hits:(a,b)=>(b.hits-a.hits)||(a.misses-b.misses), misses:(a,b)=>(b.misses-a.misses)||(a.hits-b.hits), picks:(a,b)=>((b.hits+b.misses+b.live)-(a.hits+a.misses+a.live))||(b.hits-a.hits)}[psort];
+    const rows=[...plist].sort((a,b)=>f(a,b)||a.name.localeCompare(b.name));
+    $("#players").innerHTML = rows.length ? `<div class="prow head"><span>Player / team</span><span class="r">Picks</span><span class="r">Hit–Miss</span><span class="r">Hit%</span></div>`+
+      rows.map(r=>{const dec=r.hits+r.misses, by=Object.entries(r.by).map(([m,n])=>nameOf(m)+(n>1?` ×${n}`:"")).join(", ");
+        return `<div class="prow"><div class="nm">${esc(r.name)}<div class="sub">Picked by ${esc(by)}${r.live?` · ${r.live} live`:""}</div></div>
+        <span class="r num">${r.hits+r.misses+r.live}</span><span class="r num"><span class="w">${r.hits}</span>–<span class="l">${r.misses}</span></span><span class="r num">${dec?Math.round(100*r.hits/dec)+"%":"—"}</span></div>`}).join("")
+      : `<div class="empty">No picks yet.</div>`;
+    document.querySelectorAll("#psort button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.s===psort));
+  }
+  $("#psort").onclick=e=>{const b=e.target.closest("button"); if(!b) return; psort=b.dataset.s; renderPlayers();};
+  renderPlayers();
 
   const rev=[...slips].sort((a,b)=>(b.date||"").localeCompare(a.date||""));
   $("#slipCount").textContent=`${slips.length} slip${slips.length===1?"":"s"}`;
