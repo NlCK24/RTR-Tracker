@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-22T07:35:16-05:00",
+ "updated": "2026-10-23T11:47:55-05:00",
  "rules": [
   "Each pick's odds must be between -250 and +250.",
   "Only nights with at least 5 NBA games count."
@@ -36,6 +36,18 @@
   {
    "id": "marco",
    "name": "Marco"
+  },
+  {
+   "id": "noah",
+   "name": "Noah"
+  },
+  {
+   "id": "smoke",
+   "name": "Smoke"
+  },
+  {
+   "id": "cole",
+   "name": "Cole"
   }
  ],
  "slips": [
@@ -108,6 +120,102 @@
      "odds": "-128",
      "game": "Mavericks @ Rockets · 8:40 PM ET",
      "result": "miss"
+    }
+   ]
+  },
+  {
+   "id": "2026-10-23",
+   "date": "2026-10-23",
+   "stake": 5,
+   "payout": 1268.0,
+   "legs": [
+    {
+     "member": "henry",
+     "player": "Collin Murray-Boyles",
+     "pick": "Collin Murray-Boyles over 18.5 pts+reb+ast",
+     "odds": "-114",
+     "game": "Raptors @ Wizards · 7:10 PM ET",
+     "result": "pending"
+    },
+    {
+     "member": "aj",
+     "player": "Kawhi Leonard",
+     "pick": "Kawhi Leonard 2+ made threes",
+     "odds": "-250",
+     "game": "Raptors @ Wizards · 7:10 PM ET",
+     "result": "pending"
+    },
+    {
+     "member": "cole",
+     "player": "Kyrie Irving",
+     "pick": "Kyrie Irving 2+ made threes",
+     "odds": "-260",
+     "game": "Mavericks @ Pacers · 7:10 PM ET",
+     "result": "pending"
+    },
+    {
+     "member": "noah",
+     "player": "Cade Cunningham",
+     "pick": "Cade Cunningham 2+ made threes",
+     "odds": "-210",
+     "game": "Pistons @ Heat · 8:10 PM ET",
+     "result": "pending"
+    },
+    {
+     "member": "sow",
+     "player": "New Orleans Pelicans",
+     "pick": "New Orleans Pelicans ML",
+     "odds": "+102",
+     "game": "Pelicans @ Jazz · 9:40 PM ET",
+     "result": "pending"
+    },
+    {
+     "member": "beez",
+     "player": "Darius Acuff Jr.",
+     "pick": "Darius Acuff Jr. 2+ made threes",
+     "odds": "-142",
+     "game": "Trail Blazers @ Kings · 10:10 PM ET",
+     "result": "pending"
+    },
+    {
+     "member": "marco",
+     "player": "Ty Jerome",
+     "pick": "Ty Jerome 20+ points",
+     "odds": "-164",
+     "game": "Grizzlies @ Warriors · 10:10 PM ET",
+     "result": "pending"
+    },
+    {
+     "member": "yin",
+     "player": "Keaton Wagler",
+     "pick": "Keaton Wagler 10+ points",
+     "odds": "-230",
+     "game": "Clippers @ Lakers · 10:10 PM ET",
+     "result": "pending"
+    },
+    {
+     "member": "chris",
+     "player": "Golden State Warriors",
+     "pick": "Golden State Warriors ML",
+     "odds": "-154",
+     "game": "Grizzlies @ Warriors · 10:10 PM ET",
+     "result": "pending"
+    },
+    {
+     "member": "smoke",
+     "player": "Paolo Banchero",
+     "pick": "Paolo Banchero 6+ assists",
+     "odds": "+100",
+     "game": "Timberwolves @ Magic · 7:10 PM ET",
+     "result": "pending"
+    },
+    {
+     "member": "nick",
+     "player": "Kevin Durant",
+     "pick": "Kevin Durant over 23.5 points",
+     "odds": "-125",
+     "game": "Rockets @ Spurs · 9:40 PM ET",
+     "result": "pending"
     }
    ]
   }
