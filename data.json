@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-24T14:44:19-05:00",
+ "updated": "2026-10-24T14:49:56-05:00",
  "rules": [
   "Each pick's odds must be between -250 and +250.",
   "Only nights with at least 5 NBA games count."
@@ -223,7 +223,7 @@
    "id": "2026-10-24",
    "date": "2026-10-24",
    "stake": 5,
-   "payout": 329.0,
+   "payout": 332.3,
    "legs": [
     {
      "member": "chris",
