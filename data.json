@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-23T23:44:01-05:00",
+ "updated": "2026-10-23T23:57:09-05:00",
  "rules": [
   "Each pick's odds must be between -250 and +250.",
   "Only nights with at least 5 NBA games count."
@@ -175,7 +175,7 @@
      "pick": "Darius Acuff Jr. 2+ made threes",
      "odds": "-142",
      "game": "Trail Blazers @ Kings · 10:10 PM ET",
-     "result": "pending"
+     "result": "hit"
     },
     {
      "member": "marco",
@@ -183,7 +183,7 @@
      "pick": "Ty Jerome 20+ points",
      "odds": "-164",
      "game": "Grizzlies @ Warriors · 10:10 PM ET",
-     "result": "pending"
+     "result": "hit"
     },
     {
      "member": "yin",
@@ -191,7 +191,7 @@
      "pick": "Keaton Wagler 10+ points",
      "odds": "-230",
      "game": "Clippers @ Lakers · 10:10 PM ET",
-     "result": "pending"
+     "result": "hit"
     },
     {
      "member": "chris",
@@ -199,7 +199,7 @@
      "pick": "Golden State Warriors ML",
      "odds": "-154",
      "game": "Grizzlies @ Warriors · 10:10 PM ET",
-     "result": "pending"
+     "result": "miss"
     },
     {
      "member": "smoke",
