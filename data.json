@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-23T23:27:49-05:00",
+ "updated": "2026-10-23T23:44:01-05:00",
  "rules": [
   "Each pick's odds must be between -250 and +250.",
   "Only nights with at least 5 NBA games count."
@@ -167,7 +167,7 @@
      "pick": "New Orleans Pelicans ML",
      "odds": "+102",
      "game": "Pelicans @ Jazz · 9:40 PM ET",
-     "result": "pending"
+     "result": "miss"
     },
     {
      "member": "beez",
@@ -215,7 +215,7 @@
      "pick": "Kevin Durant over 23.5 points",
      "odds": "-125",
      "game": "Rockets @ Spurs · 9:40 PM ET",
-     "result": "pending"
+     "result": "miss"
     }
    ]
   }
