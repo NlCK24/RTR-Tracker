@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-23T23:57:09-05:00",
+ "updated": "2026-10-24T14:44:19-05:00",
  "rules": [
   "Each pick's odds must be between -250 and +250.",
   "Only nights with at least 5 NBA games count."
@@ -216,6 +216,78 @@
      "odds": "-125",
      "game": "Rockets @ Spurs · 9:40 PM ET",
      "result": "miss"
+    }
+   ]
+  },
+  {
+   "id": "2026-10-24",
+   "date": "2026-10-24",
+   "stake": 5,
+   "payout": 329.0,
+   "legs": [
+    {
+     "member": "chris",
+     "player": "Miami Heat",
+     "pick": "Miami Heat ML",
+     "odds": "-148",
+     "game": "Heat @ Hornets · 6:10 PM ET",
+     "result": "pending"
+    },
+    {
+     "member": "marco",
+     "player": "Kyrie Irving",
+     "pick": "Kyrie Irving 20+ points",
+     "odds": "-154",
+     "game": "Spurs @ Mavericks · 8:10 PM ET",
+     "result": "pending"
+    },
+    {
+     "member": "henry",
+     "player": "Kyshawn George",
+     "pick": "Kyshawn George 2+ made threes",
+     "odds": "-188",
+     "game": "Wizards @ Bulls · 8:10 PM ET",
+     "result": "pending"
+    },
+    {
+     "member": "beez",
+     "player": "Tyrese Maxey",
+     "pick": "Tyrese Maxey 25+ points",
+     "odds": "-146",
+     "game": "Bucks @ 76ers · 7:40 PM ET",
+     "result": "pending"
+    },
+    {
+     "member": "cole",
+     "player": "Jaylen Brown",
+     "pick": "Jaylen Brown 2+ made threes",
+     "odds": "-106",
+     "game": "Bucks @ 76ers · 7:40 PM ET",
+     "result": "pending"
+    },
+    {
+     "member": "nick",
+     "player": "De'Aaron Fox",
+     "pick": "De'Aaron Fox 6+ assists",
+     "odds": "-122",
+     "game": "Spurs @ Mavericks · 8:10 PM ET",
+     "result": "pending"
+    },
+    {
+     "member": "yin",
+     "player": "Yaxel Lendeborg",
+     "pick": "Yaxel Lendeborg 15+ points",
+     "odds": "-205",
+     "game": "Warriors @ Suns · 10:10 PM ET",
+     "result": "pending"
+    },
+    {
+     "member": "sow",
+     "player": "Evan Mobley",
+     "pick": "Evan Mobley over 17.5 points",
+     "odds": "-111",
+     "game": "Nets @ Cavaliers · 7:40 PM ET",
+     "result": "pending"
     }
    ]
   }
