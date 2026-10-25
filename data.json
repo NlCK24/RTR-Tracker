@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-24T14:49:56-05:00",
+ "updated": "2026-10-24T22:39:57-05:00",
  "rules": [
   "Each pick's odds must be between -250 and +250.",
   "Only nights with at least 5 NBA games count."
@@ -231,7 +231,7 @@
      "pick": "Miami Heat ML",
      "odds": "-148",
      "game": "Heat @ Hornets · 6:10 PM ET",
-     "result": "pending"
+     "result": "miss"
     },
     {
      "member": "marco",
@@ -239,7 +239,7 @@
      "pick": "Kyrie Irving 20+ points",
      "odds": "-154",
      "game": "Spurs @ Mavericks · 8:10 PM ET",
-     "result": "pending"
+     "result": "void"
     },
     {
      "member": "henry",
@@ -247,7 +247,7 @@
      "pick": "Kyshawn George 2+ made threes",
      "odds": "-188",
      "game": "Wizards @ Bulls · 8:10 PM ET",
-     "result": "pending"
+     "result": "miss"
     },
     {
      "member": "beez",
@@ -255,7 +255,7 @@
      "pick": "Tyrese Maxey 25+ points",
      "odds": "-146",
      "game": "Bucks @ 76ers · 7:40 PM ET",
-     "result": "pending"
+     "result": "hit"
     },
     {
      "member": "cole",
@@ -263,7 +263,7 @@
      "pick": "Jaylen Brown 2+ made threes",
      "odds": "-106",
      "game": "Bucks @ 76ers · 7:40 PM ET",
-     "result": "pending"
+     "result": "hit"
     },
     {
      "member": "nick",
@@ -271,7 +271,7 @@
      "pick": "De'Aaron Fox 6+ assists",
      "odds": "-122",
      "game": "Spurs @ Mavericks · 8:10 PM ET",
-     "result": "pending"
+     "result": "hit"
     },
     {
      "member": "yin",
@@ -287,7 +287,7 @@
      "pick": "Evan Mobley over 17.5 points",
      "odds": "-111",
      "game": "Nets @ Cavaliers · 7:40 PM ET",
-     "result": "pending"
+     "result": "hit"
     }
    ]
   }
