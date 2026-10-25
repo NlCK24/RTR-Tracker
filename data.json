@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-24T23:16:27-05:00",
+ "updated": "2026-10-25T01:46:59-05:00",
  "rules": [
   "Each pick's odds must be between -250 and +250.",
   "Only nights with at least 5 NBA games count."
@@ -87,7 +87,8 @@
      "pick": "Stephen Curry 25+ points",
      "odds": "SGP +202",
      "game": "Warriors @ Lakers · 10:00 PM ET",
-     "result": "miss"
+     "result": "miss",
+     "actual": "Had 23 points"
     },
     {
      "member": "henry",
@@ -111,7 +112,8 @@
      "pick": "LaMelo Ball 8+ assists",
      "odds": "-146",
      "game": "Timberwolves @ Heat · 7:30 PM ET",
-     "result": "miss"
+     "result": "miss",
+     "actual": "Had 6 assists (21 points)"
     },
     {
      "member": "marco",
@@ -119,7 +121,8 @@
      "pick": "Kyrie Irving 20+ points",
      "odds": "-128",
      "game": "Mavericks @ Rockets · 8:40 PM ET",
-     "result": "miss"
+     "result": "miss",
+     "actual": "Had 15 points in 23 minutes"
     }
    ]
   },
@@ -135,7 +138,8 @@
      "pick": "Collin Murray-Boyles over 18.5 pts+reb+ast",
      "odds": "-114",
      "game": "Raptors @ Wizards · 7:10 PM ET",
-     "result": "miss"
+     "result": "miss",
+     "actual": "8 points, 3 rebounds in 18 minutes"
     },
     {
      "member": "aj",
@@ -167,7 +171,8 @@
      "pick": "New Orleans Pelicans ML",
      "odds": "+102",
      "game": "Pelicans @ Jazz · 9:40 PM ET",
-     "result": "miss"
+     "result": "miss",
+     "actual": "Jazz won 120–119"
     },
     {
      "member": "beez",
@@ -199,7 +204,8 @@
      "pick": "Golden State Warriors ML",
      "odds": "-154",
      "game": "Grizzlies @ Warriors · 10:10 PM ET",
-     "result": "miss"
+     "result": "miss",
+     "actual": "Grizzlies won 111–108"
     },
     {
      "member": "smoke",
@@ -207,7 +213,8 @@
      "pick": "Paolo Banchero 6+ assists",
      "odds": "+100",
      "game": "Timberwolves @ Magic · 7:10 PM ET",
-     "result": "miss"
+     "result": "miss",
+     "actual": "Had 5 assists (14 points), left late with an ankle injury"
     },
     {
      "member": "nick",
@@ -215,7 +222,8 @@
      "pick": "Kevin Durant over 23.5 points",
      "odds": "-125",
      "game": "Rockets @ Spurs · 9:40 PM ET",
-     "result": "miss"
+     "result": "miss",
+     "actual": "Had 20 points"
     }
    ]
   },
@@ -231,7 +239,8 @@
      "pick": "Miami Heat ML",
      "odds": "-148",
      "game": "Heat @ Hornets · 6:10 PM ET",
-     "result": "miss"
+     "result": "miss",
+     "actual": "Hornets won 115–110"
     },
     {
      "member": "marco",
@@ -239,7 +248,8 @@
      "pick": "Kyrie Irving 20+ points",
      "odds": "-154",
      "game": "Spurs @ Mavericks · 8:10 PM ET",
-     "result": "void"
+     "result": "void",
+     "actual": "Did not play"
     },
     {
      "member": "henry",
@@ -247,7 +257,8 @@
      "pick": "Kyshawn George 2+ made threes",
      "odds": "-188",
      "game": "Wizards @ Bulls · 8:10 PM ET",
-     "result": "miss"
+     "result": "miss",
+     "actual": "0 for 5 from three (22 points)"
     },
     {
      "member": "beez",

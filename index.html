@@ -84,6 +84,7 @@ h2{font-family:var(--f-display);font-weight:400;font-size:22px;letter-spacing:.0
 .leg .who{font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--accent)}
 .leg .pk{font-weight:600}
 .leg .gm{font-size:12.5px;color:var(--muted)}
+.leg .act{font-size:12.5px;color:var(--muted);margin-top:2px}.leg .act.miss{color:var(--miss);font-weight:600}
 .res{font-weight:700;font-size:12px;letter-spacing:.1em;text-transform:uppercase;padding:7px 10px;border-radius:6px;min-width:58px;text-align:center}
 .res.hit{background:var(--hit-bg);color:var(--hit)}.res.miss{background:var(--miss-bg);color:var(--miss)}
 .res.pending{background:var(--pend-bg);color:var(--pend)}.res.void{background:var(--void-bg);color:var(--muted)}
@@ -228,7 +229,7 @@ h2{font-family:var(--f-display);font-weight:400;font-size:22px;letter-spacing:.0
   $("#slipCount").textContent=`${slips.length} slip${slips.length===1?"":"s"}`;
   $("#slips").innerHTML=rev.map(p=>{const s=status(p),legs=p.legs||[],h=legs.filter(l=>l.result==="hit").length;
     return `<article class="panel slip"><div class="slip-h"><div><div class="t">${esc(fmtDate(p.date))}</div><div class="m">${legs.length}-leg · ${h}/${legs.length} hit</div></div><span class="pill ${s}">${s==="won"?"Cashed":s==="lost"?"Busted":"Live"}</span></div>
-    ${legs.map(l=>`<div class="leg"><div style="min-width:0"><div class="who">${esc(nameOf(l.member))}</div><div class="pk">${esc(l.pick)}${l.odds?` <span class="num gm">${esc(l.odds)}</span>`:""}${outOfRange(l.odds)?`<span class="flag">Outside -250/+250</span>`:""}</div>${l.game?`<div class="gm">${esc(l.game)}</div>`:""}</div><span class="res ${esc(l.result)}">${l.result==="pending"?"Live":esc(l.result)}</span></div>`).join("")}
+    ${legs.map(l=>`<div class="leg"><div style="min-width:0"><div class="who">${esc(nameOf(l.member))}</div><div class="pk">${esc(l.pick)}${l.odds?` <span class="num gm">${esc(l.odds)}</span>`:""}${outOfRange(l.odds)?`<span class="flag">Outside -250/+250</span>`:""}</div>${l.game?`<div class="gm">${esc(l.game)}</div>`:""}${l.actual?`<div class="act ${esc(l.result)}">${esc(l.actual)}</div>`:""}</div><span class="res ${esc(l.result)}">${l.result==="pending"?"Live":esc(l.result)}</span></div>`).join("")}
     <div class="slip-f num">${money(Number(p.stake)||0)} to win ${money(Number(p.payout)||0)}</div></article>`}).join("")||`<div class="panel empty">No slips yet.</div>`;
   if(data.updated){ try{ $("#updated").textContent="Last updated "+new Date(data.updated).toLocaleString(undefined,{weekday:"short",month:"short",day:"numeric",hour:"numeric",minute:"2-digit"}); }catch(e){} }
 })();
