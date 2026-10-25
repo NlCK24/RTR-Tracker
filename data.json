@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-24T22:39:57-05:00",
+ "updated": "2026-10-24T23:16:27-05:00",
  "rules": [
   "Each pick's odds must be between -250 and +250.",
   "Only nights with at least 5 NBA games count."
@@ -279,7 +279,7 @@
      "pick": "Yaxel Lendeborg 15+ points",
      "odds": "-205",
      "game": "Warriors @ Suns · 10:10 PM ET",
-     "result": "pending"
+     "result": "hit"
     },
     {
      "member": "sow",
