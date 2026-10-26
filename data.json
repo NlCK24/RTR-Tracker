@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-25T01:46:59-05:00",
+ "updated": "2026-10-26T11:45:11-05:00",
  "rules": [
   "Each pick's odds must be between -250 and +250.",
   "Only nights with at least 5 NBA games count."
@@ -299,6 +299,94 @@
      "odds": "-111",
      "game": "Nets @ Cavaliers · 7:40 PM ET",
      "result": "hit"
+    }
+   ]
+  },
+  {
+   "id": "2026-10-26",
+   "date": "2026-10-26",
+   "stake": 14.99,
+   "payout": 1695.48,
+   "legs": [
+    {
+     "member": "sow",
+     "player": "Donovan Mitchell",
+     "pick": "Donovan Mitchell 25+ points",
+     "odds": "",
+     "game": "Timberwolves @ Cavaliers · 7:10 PM ET",
+     "result": "pending"
+    },
+    {
+     "member": "yin",
+     "player": "Anthony Edwards",
+     "pick": "Anthony Edwards 3+ made threes",
+     "odds": "",
+     "game": "Timberwolves @ Cavaliers · 7:10 PM ET",
+     "result": "pending"
+    },
+    {
+     "member": "marco",
+     "player": "Indiana Pacers",
+     "pick": "Indiana Pacers ML",
+     "odds": "SGP +149",
+     "game": "Pacers @ Bucks · 8:10 PM ET",
+     "result": "pending"
+    },
+    {
+     "member": "noah",
+     "player": "Tyrese Haliburton",
+     "pick": "Tyrese Haliburton 10+ assists",
+     "odds": "SGP +149",
+     "game": "Pacers @ Bucks · 8:10 PM ET",
+     "result": "pending"
+    },
+    {
+     "member": "aj",
+     "player": "Shai Gilgeous-Alexander",
+     "pick": "Shai Gilgeous-Alexander 30+ points",
+     "odds": "SGP +327",
+     "game": "Suns @ Thunder · 8:10 PM ET",
+     "result": "pending"
+    },
+    {
+     "member": "beez",
+     "player": "Chet Holmgren",
+     "pick": "Chet Holmgren 1+ made threes",
+     "odds": "SGP +327",
+     "game": "Suns @ Thunder · 8:10 PM ET",
+     "result": "pending"
+    },
+    {
+     "member": "chris",
+     "player": "Shai Gilgeous-Alexander",
+     "pick": "Shai Gilgeous-Alexander under 6.5 assists",
+     "odds": "SGP +327",
+     "game": "Suns @ Thunder · 8:10 PM ET",
+     "result": "pending"
+    },
+    {
+     "member": "henry",
+     "player": "Anthony Davis",
+     "pick": "Anthony Davis 20+ points",
+     "odds": "-178",
+     "game": "Wizards @ Hornets · 7:10 PM ET",
+     "result": "pending"
+    },
+    {
+     "member": "nick",
+     "player": "Caleb Wilson",
+     "pick": "Caleb Wilson over 16.5 points",
+     "odds": "-130",
+     "game": "Bulls @ Celtics · 7:40 PM ET",
+     "result": "pending"
+    },
+    {
+     "member": "cole",
+     "player": "Tim Hardaway Jr.",
+     "pick": "Tim Hardaway Jr. 2+ made threes",
+     "odds": "-166",
+     "game": "Mavericks @ Heat · 7:40 PM ET",
+     "result": "pending"
     }
    ]
   }
