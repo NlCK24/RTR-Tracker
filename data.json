@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-26T21:48:14-05:00",
+ "updated": "2026-10-26T23:53:01-05:00",
  "rules": [
   "Each pick's odds must be between -250 and +250.",
   "Only nights with at least 5 NBA games count."
@@ -331,7 +331,7 @@
      "odds": "SGP +149",
      "game": "Pacers @ Bucks · 8:10 PM ET",
      "result": "miss",
-     "actual": "Bucks won"
+     "actual": "Bucks won 110–102"
     },
     {
      "member": "noah",
@@ -348,7 +348,8 @@
      "pick": "Shai Gilgeous-Alexander 30+ points",
      "odds": "SGP +327",
      "game": "Suns @ Thunder · 8:10 PM ET",
-     "result": "miss"
+     "result": "miss",
+     "actual": "Had 26 points"
     },
     {
      "member": "beez",
