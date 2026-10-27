@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-26T23:53:01-05:00",
+ "updated": "2026-10-26T23:56:01-05:00",
  "rules": [
   "Each pick's odds must be between -250 and +250.",
   "Only nights with at least 5 NBA games count."
@@ -390,7 +390,8 @@
      "pick": "Tim Hardaway Jr. 2+ made threes",
      "odds": "-166",
      "game": "Mavericks @ Heat · 7:40 PM ET",
-     "result": "miss"
+     "result": "miss",
+     "actual": "1 for 4 from three (5 points)"
     }
    ]
   }
