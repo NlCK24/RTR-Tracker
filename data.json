@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-30T20:04:03-05:00",
+ "updated": "2026-10-31T01:14:47-05:00",
  "rules": [
   "Each pick's odds must be between -250 and +250.",
   "Only nights with at least 5 NBA games count."
@@ -407,7 +407,8 @@
      "pick": "Joel Embiid 20+ points",
      "odds": "-370",
      "game": "Knicks @ 76ers · 7:40 PM ET",
-     "result": "pending"
+     "result": "miss",
+     "actual": "Had 10 points"
     },
     {
      "member": "henry",
@@ -415,7 +416,7 @@
      "pick": "Anthony Davis 20+ points",
      "odds": "-160",
      "game": "Hornets @ Wizards · 7:10 PM ET",
-     "result": "pending"
+     "result": "hit"
     },
     {
      "member": "nick",
@@ -423,7 +424,7 @@
      "pick": "Luka Doncic 30+ points",
      "odds": "-260",
      "game": "Lakers @ Warriors · 10:10 PM ET",
-     "result": "pending"
+     "result": "hit"
     },
     {
      "member": "yin",
@@ -431,7 +432,8 @@
      "pick": "Austin Reaves 2+ made threes",
      "odds": "-240",
      "game": "Lakers @ Warriors · 10:10 PM ET",
-     "result": "pending"
+     "result": "miss",
+     "actual": "Made 1 three (21 points)"
     },
     {
      "member": "chris",
@@ -439,7 +441,7 @@
      "pick": "Miami Heat -3.5",
      "odds": "-215",
      "game": "Pacers @ Heat · 8:10 PM ET",
-     "result": "pending"
+     "result": "hit"
     },
     {
      "member": "noah",
@@ -447,7 +449,7 @@
      "pick": "Scottie Barnes over 21.5 points",
      "odds": "-118",
      "game": "Magic @ Raptors · 7:40 PM ET",
-     "result": "pending"
+     "result": "hit"
     },
     {
      "member": "aj",
@@ -455,7 +457,7 @@
      "pick": "Andrew Nembhard 2+ made threes",
      "odds": "-125",
      "game": "Pacers @ Heat · 8:10 PM ET",
-     "result": "pending"
+     "result": "hit"
     },
     {
      "member": "marco",
@@ -463,7 +465,8 @@
      "pick": "Cade Cunningham over 23.5 points",
      "odds": "-115",
      "game": "Pistons @ Nets · 7:40 PM ET",
-     "result": "pending"
+     "result": "miss",
+     "actual": "Had 20 points"
     }
    ]
   }
