@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-26T23:56:01-05:00",
+ "updated": "2026-10-30T20:04:03-05:00",
  "rules": [
   "Each pick's odds must be between -250 and +250.",
   "Only nights with at least 5 NBA games count."
@@ -392,6 +392,78 @@
      "game": "Mavericks @ Heat · 7:40 PM ET",
      "result": "miss",
      "actual": "1 for 4 from three (5 points)"
+    }
+   ]
+  },
+  {
+   "id": "2026-10-30",
+   "date": "2026-10-30",
+   "stake": 5,
+   "payout": 188.85,
+   "legs": [
+    {
+     "member": "beez",
+     "player": "Joel Embiid",
+     "pick": "Joel Embiid 20+ points",
+     "odds": "-370",
+     "game": "Knicks @ 76ers · 7:40 PM ET",
+     "result": "pending"
+    },
+    {
+     "member": "henry",
+     "player": "Anthony Davis",
+     "pick": "Anthony Davis 20+ points",
+     "odds": "-160",
+     "game": "Hornets @ Wizards · 7:10 PM ET",
+     "result": "pending"
+    },
+    {
+     "member": "nick",
+     "player": "Luka Doncic",
+     "pick": "Luka Doncic 30+ points",
+     "odds": "-260",
+     "game": "Lakers @ Warriors · 10:10 PM ET",
+     "result": "pending"
+    },
+    {
+     "member": "yin",
+     "player": "Austin Reaves",
+     "pick": "Austin Reaves 2+ made threes",
+     "odds": "-240",
+     "game": "Lakers @ Warriors · 10:10 PM ET",
+     "result": "pending"
+    },
+    {
+     "member": "chris",
+     "player": "Miami Heat",
+     "pick": "Miami Heat -3.5",
+     "odds": "-215",
+     "game": "Pacers @ Heat · 8:10 PM ET",
+     "result": "pending"
+    },
+    {
+     "member": "noah",
+     "player": "Scottie Barnes",
+     "pick": "Scottie Barnes over 21.5 points",
+     "odds": "-118",
+     "game": "Magic @ Raptors · 7:40 PM ET",
+     "result": "pending"
+    },
+    {
+     "member": "aj",
+     "player": "Andrew Nembhard",
+     "pick": "Andrew Nembhard 2+ made threes",
+     "odds": "-125",
+     "game": "Pacers @ Heat · 8:10 PM ET",
+     "result": "pending"
+    },
+    {
+     "member": "marco",
+     "player": "Cade Cunningham",
+     "pick": "Cade Cunningham over 23.5 points",
+     "odds": "-115",
+     "game": "Pistons @ Nets · 7:40 PM ET",
+     "result": "pending"
     }
    ]
   }
