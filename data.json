@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-31T01:14:47-05:00",
+ "updated": "2026-11-02T14:46:00-06:00",
  "rules": [
   "Each pick's odds must be between -250 and +250.",
   "Only nights with at least 5 NBA games count."
@@ -467,6 +467,86 @@
      "game": "Pistons @ Nets · 7:40 PM ET",
      "result": "miss",
      "actual": "Had 20 points"
+    }
+   ]
+  },
+  {
+   "id": "2026-11-02",
+   "date": "2026-11-02",
+   "stake": 5,
+   "payout": 231.0,
+   "legs": [
+    {
+     "member": "henry",
+     "player": "Cameron Boozer",
+     "pick": "Cameron Boozer 15+ points",
+     "odds": "-194",
+     "game": "Pelicans @ Grizzlies · 8:10 PM ET",
+     "result": "pending"
+    },
+    {
+     "member": "marco",
+     "player": "Victor Wembanyama",
+     "pick": "Victor Wembanyama 25+ points",
+     "odds": "-162",
+     "game": "Jazz @ Spurs · 8:40 PM ET",
+     "result": "pending"
+    },
+    {
+     "member": "sow",
+     "player": "Cleveland Cavaliers",
+     "pick": "Cleveland Cavaliers ML",
+     "odds": "-176",
+     "game": "Thunder @ Cavaliers · 7:10 PM ET",
+     "result": "pending"
+    },
+    {
+     "member": "noah",
+     "player": "Donovan Mitchell",
+     "pick": "Donovan Mitchell 20+ points",
+     "odds": "-215",
+     "game": "Thunder @ Cavaliers · 7:10 PM ET",
+     "result": "pending"
+    },
+    {
+     "member": "yin",
+     "player": "Brandon Miller",
+     "pick": "Brandon Miller 20+ points",
+     "odds": "-230",
+     "game": "Pistons @ Hornets · 7:40 PM ET",
+     "result": "pending"
+    },
+    {
+     "member": "nick",
+     "player": "Tyrese Maxey",
+     "pick": "Tyrese Maxey 25+ points",
+     "odds": "-170",
+     "game": "Bulls @ 76ers · 7:40 PM ET",
+     "result": "pending"
+    },
+    {
+     "member": "cole",
+     "player": "Jamal Murray",
+     "pick": "Jamal Murray 20+ points",
+     "odds": "-265",
+     "game": "Trail Blazers @ Nuggets · 9:10 PM ET",
+     "result": "pending"
+    },
+    {
+     "member": "aj",
+     "player": "Cooper Flagg",
+     "pick": "Cooper Flagg 25+ points",
+     "odds": "-194",
+     "game": "Kings @ Mavericks · 8:10 PM ET",
+     "result": "pending"
+    },
+    {
+     "member": "beez",
+     "player": "Evan Mobley",
+     "pick": "Evan Mobley 15+ points",
+     "odds": "-230",
+     "game": "Thunder @ Cavaliers · 7:10 PM ET",
+     "result": "pending"
     }
    ]
   }
