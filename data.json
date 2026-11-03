@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-03T01:13:42-06:00",
+ "updated": "2026-11-03T03:58:23-06:00",
  "rules": [
   "Each pick's odds must be between -250 and +250.",
   "Only nights with at least 5 NBA games count."
@@ -551,8 +551,7 @@
      "pick": "Evan Mobley 15+ points",
      "odds": "-230",
      "game": "Thunder @ Cavaliers · 7:10 PM ET",
-     "result": "miss",
-     "actual": "Had 16 points"
+     "result": "hit"
     }
    ]
   }
