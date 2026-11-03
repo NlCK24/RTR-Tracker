@@ -167,17 +167,20 @@ h2{font-family:var(--f-display);font-weight:400;font-size:22px;letter-spacing:.0
   const members=data.members||[], slips=data.slips||[], rules=data.rules||[];
   if(rules.length){ $("#rules").innerHTML=rules.map(r=>`<li>${esc(r)}</li>`).join(""); $("#rulesBox").hidden=false; }
   const outOfRange=o=>{ const m=String(o||"").trim().match(/^([+-]\d+)$/); if(!m) return false; const n=+m[1]; return n<-250||n>250; };
+  const impl=o=>{ const m=String(o||"").trim().match(/^([+-]?\d+)$/); if(!m) return null; const n=+m[1]; if(Math.abs(n)<100) return null; return n<0?-n/(-n+100):100/(n+100); };
+  const toAm=q=>{ const n=q>=.5?-100*q/(1-q):100*(1-q)/q; const v=Math.round(n); return v>0?"+"+v:String(v); };
   const nameOf=id=>(members.find(m=>m.id===id)||{}).name||id;
   const status=p=>{const l=p.legs||[]; if(l.some(x=>x.result==="miss")) return "lost"; if(l.length&&l.every(x=>x.result==="hit"||x.result==="void")) return "won"; return "live";};
 
   const sorted=[...slips].sort((a,b)=>(a.date||"").localeCompare(b.date||""));
-  const st={}; members.forEach(m=>st[m.id]={name:m.name,hits:0,misses:0,pending:0,seq:[],soleBust:0});
+  const st={}; members.forEach(m=>st[m.id]={name:m.name,hits:0,misses:0,pending:0,seq:[],soleBust:0,probs:[]});
   let won=0,lost=0,staked=0,ret=0,lh=0,lm=0,pot=0;
   for(const p of sorted){
     const s=status(p); pot+=Number(p.payout)||0;
     if(s==="won"){won++;ret+=Number(p.payout)||0} if(s==="lost") lost++; if(s!=="live") staked+=Number(p.stake)||0;
     const misses=(p.legs||[]).filter(l=>l.result==="miss").length;
     for(const l of p.legs||[]){ const r=st[l.member]; if(!r) continue;
+      const ip=impl(l.odds); if(ip!=null) r.probs.push(ip);
       if(l.result==="hit"){r.hits++;r.seq.push("h");lh++} else if(l.result==="miss"){r.misses++;r.seq.push("m");lm++; if(misses===1) r.soleBust++} else if(l.result==="pending") r.pending++; }
   }
   const rows=Object.values(st).map(r=>{ let run=0,best=0; for(const x of r.seq){run=x==="h"?run+1:0;best=Math.max(best,run)}
@@ -193,7 +196,7 @@ h2{font-family:var(--f-display);font-weight:400;font-size:22px;letter-spacing:.0
   const stk=r=>r.streak>0?`<span class="stk w">W${r.streak}</span>`:r.streak<0?`<span class="stk l">L${-r.streak}</span>`:`<span class="stk z">–</span>`;
   const form=r=>`<span class="form" aria-label="Last five">${Array.from({length:5},(_,i)=>`<i class="${r.form[r.form.length-5+i]||""}"></i>`).join("")}</span>`;
   $("#standings").innerHTML=`<div class="srow head"><span>#</span><span>Name</span><span class="r">W–L</span><span class="r">Hit%</span><span class="r">Strk</span></div>`+
-    rows.map((r,i)=>`<div class="srow"><span class="rk">${i+1}</span><div class="nm">${esc(r.name)} ${form(r)}<div class="sub"><span>Best W${r.best}</span><span>Sole bust ${r.soleBust}</span>${r.pending?`<span>${r.pending} live</span>`:""}</div></div>
+    rows.map((r,i)=>`<div class="srow"><span class="rk">${i+1}</span><div class="nm">${esc(r.name)} ${form(r)}<div class="sub"><span>Best W${r.best}</span><span>Sole bust ${r.soleBust}</span>${r.probs.length?`<span title="Average odds across ${r.probs.length} picks">Avg odds ${toAm(r.probs.reduce((a,b)=>a+b,0)/r.probs.length)}</span>`:""}${r.pending?`<span>${r.pending} live</span>`:""}</div></div>
       <span class="r num">${r.hits}–${r.misses}</span><span class="r num">${r.rate==null?"—":Math.round(r.rate*100)+"%"}</span><span class="r">${stk(r)}</span></div>`).join("");
 
   const dec=rows.filter(r=>r.hits+r.misses>0), pick=(a,f)=>a.length?a.reduce((x,y)=>f(y)>f(x)?y:x):null;
