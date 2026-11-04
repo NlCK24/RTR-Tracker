@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-03T03:58:23-06:00",
+ "updated": "2026-11-04T15:12:45-06:00",
  "rules": [
   "Each pick's odds must be between -250 and +250.",
   "Only nights with at least 5 NBA games count."
@@ -552,6 +552,70 @@
      "odds": "-230",
      "game": "Thunder @ Cavaliers · 7:10 PM ET",
      "result": "hit"
+    }
+   ]
+  },
+  {
+   "id": "2026-11-04",
+   "date": "2026-11-04",
+   "stake": 5,
+   "payout": 97.3,
+   "legs": [
+    {
+     "member": "marco",
+     "player": "Cameron Boozer",
+     "pick": "Cameron Boozer 15+ points",
+     "odds": "-245",
+     "game": "Pacers @ Grizzlies · 8:10 PM ET",
+     "result": "pending"
+    },
+    {
+     "member": "sow",
+     "player": "Anthony Davis",
+     "pick": "Anthony Davis 20+ points",
+     "odds": "-310",
+     "game": "Hawks @ Wizards · 7:10 PM ET",
+     "result": "pending"
+    },
+    {
+     "member": "yin",
+     "player": "Kevin Durant",
+     "pick": "Kevin Durant 20+ points",
+     "odds": "-265",
+     "game": "Timberwolves @ Rockets · 8:40 PM ET",
+     "result": "pending"
+    },
+    {
+     "member": "beez",
+     "player": "Tyrese Maxey",
+     "pick": "Tyrese Maxey 20+ points",
+     "odds": "-295",
+     "game": "76ers @ Pistons · 7:10 PM ET",
+     "result": "pending"
+    },
+    {
+     "member": "henry",
+     "player": "Darryn Peterson",
+     "pick": "Darryn Peterson 15+ points",
+     "odds": "-104",
+     "game": "Jazz @ Pelicans · 8:10 PM ET",
+     "result": "pending"
+    },
+    {
+     "member": "nick",
+     "player": "Keyonte George",
+     "pick": "Keyonte George over 20.5 points",
+     "odds": "-130",
+     "game": "Jazz @ Pelicans · 8:10 PM ET",
+     "result": "pending"
+    },
+    {
+     "member": "chris",
+     "player": "LeBron James",
+     "pick": "LeBron James 15+ points",
+     "odds": "-150",
+     "game": "76ers @ Pistons · 7:10 PM ET",
+     "result": "pending"
     }
    ]
   }
