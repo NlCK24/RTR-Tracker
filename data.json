@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-05T01:21:16-06:00",
+ "updated": "2026-11-05T04:03:16-06:00",
  "rules": [
   "Each pick's odds must be between -250 and +250.",
   "Only nights with at least 5 NBA games count."
@@ -567,7 +567,8 @@
      "pick": "Cameron Boozer 15+ points",
      "odds": "-245",
      "game": "Pacers @ Grizzlies · 8:10 PM ET",
-     "result": "pending"
+     "result": "miss",
+     "actual": "Had 10 points (6 rebounds)"
     },
     {
      "member": "sow",
