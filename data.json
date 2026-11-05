@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-04T15:12:45-06:00",
+ "updated": "2026-11-05T01:21:16-06:00",
  "rules": [
   "Each pick's odds must be between -250 and +250.",
   "Only nights with at least 5 NBA games count."
@@ -575,7 +575,7 @@
      "pick": "Anthony Davis 20+ points",
      "odds": "-310",
      "game": "Hawks @ Wizards · 7:10 PM ET",
-     "result": "pending"
+     "result": "hit"
     },
     {
      "member": "yin",
@@ -583,7 +583,7 @@
      "pick": "Kevin Durant 20+ points",
      "odds": "-265",
      "game": "Timberwolves @ Rockets · 8:40 PM ET",
-     "result": "pending"
+     "result": "hit"
     },
     {
      "member": "beez",
@@ -591,7 +591,8 @@
      "pick": "Tyrese Maxey 20+ points",
      "odds": "-295",
      "game": "76ers @ Pistons · 7:10 PM ET",
-     "result": "pending"
+     "result": "miss",
+     "actual": "Had 19 points (7 assists)"
     },
     {
      "member": "henry",
@@ -599,7 +600,8 @@
      "pick": "Darryn Peterson 15+ points",
      "odds": "-104",
      "game": "Jazz @ Pelicans · 8:10 PM ET",
-     "result": "pending"
+     "result": "miss",
+     "actual": "Had 7 points (7 assists)"
     },
     {
      "member": "nick",
@@ -607,7 +609,7 @@
      "pick": "Keyonte George over 20.5 points",
      "odds": "-130",
      "game": "Jazz @ Pelicans · 8:10 PM ET",
-     "result": "pending"
+     "result": "hit"
     },
     {
      "member": "chris",
@@ -615,7 +617,8 @@
      "pick": "LeBron James 15+ points",
      "odds": "-150",
      "game": "76ers @ Pistons · 7:10 PM ET",
-     "result": "pending"
+     "result": "miss",
+     "actual": "Had 13 points (10 rebounds, 8 assists)"
     }
    ]
   }
