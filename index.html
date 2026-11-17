@@ -5,120 +5,203 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>RTR Parlay Tracker</title>
 <meta name="description" content="Rags to Riches group parlay standings for the 2026–27 NBA season.">
-<meta name="theme-color" content="#13261f">
+<meta name="theme-color" content="#07090c">
+<meta name="color-scheme" content="dark">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap">
 <style>
 :root{
-  --bg:#eef1f0; --surface:#ffffff; --sunk:#e3e8e6; --line:#cfd7d4;
-  --fg:#14201c; --muted:#5d6b66; --accent:#0f7b5f; --gold:#b9860b;
-  --hit:#178a4a; --hit-bg:#dcf3e5; --miss:#c4352b; --miss-bg:#fbe2df;
-  --pend:#6b6f7a; --pend-bg:#e9eaee; --void-bg:#efe9db;
-  --band:#13261f; --band-fg:#f1f5f3; --band-muted:#9fb3ab;
-  --f-display:"Anton","Oswald","Impact",sans-serif;
-  --f-body:"Barlow","Helvetica Neue",Arial,sans-serif;
-  --f-num:"IBM Plex Mono",ui-monospace,Menlo,monospace;
-  color-scheme:light;
+  --bg:#07090c; --surface:#0e1319; --surface-2:#131a22; --raise:#18212b;
+  --line:#1d2630; --line-2:#28333f;
+  --fg:#e9eef3; --fg-2:#b9c3cd; --muted:#7d8996; --dim:#505c68;
+  --gold:#f5b72e; --gold-bg:rgba(245,183,46,.12);
+  --hit:#2fe08a;  --hit-bg:rgba(47,224,138,.11);  --hit-line:rgba(47,224,138,.34);
+  --miss:#ff5c61; --miss-bg:rgba(255,92,97,.11);  --miss-line:rgba(255,92,97,.34);
+  --live:#3ccfff; --live-bg:rgba(60,207,255,.11); --live-line:rgba(60,207,255,.34);
+  --void:#9aa5b0; --void-bg:rgba(154,165,176,.09);--void-line:rgba(154,165,176,.24);
+  --hot:#ff8a3d;  --hot-bg:rgba(255,138,61,.13);  --hot-line:rgba(255,138,61,.42);
+  --cold:#7fc6ff; --cold-bg:rgba(127,198,255,.11);--cold-line:rgba(127,198,255,.38);
+  --f-display:"Barlow Condensed","Oswald","Arial Narrow",sans-serif;
+  --f-body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-num:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --r:10px;
+  color-scheme:dark;
 }
-@media (prefers-color-scheme:dark){:root{
-  --bg:#0d1714; --surface:#15221e; --sunk:#1b2b26; --line:#2a3d37;
-  --fg:#e7efec; --muted:#93a59f; --accent:#2fbf93; --gold:#e3b23c;
-  --hit:#4fd18a; --hit-bg:#173a28; --miss:#ff7a6e; --miss-bg:#3d1c19;
-  --pend:#a3a8b5; --pend-bg:#262b33; --void-bg:#33301f;
-  --band:#08110e; --band-fg:#eef4f1; --band-muted:#87a097; color-scheme:dark}}
 *{box-sizing:border-box}
-html{padding-top:env(safe-area-inset-top,0px)}
-body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:15px;line-height:1.45;padding-bottom:env(safe-area-inset-bottom,0px)}
-body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--band)}
-.wrap{max-width:760px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-.num{font-family:var(--f-num);font-variant-numeric:tabular-nums}
+html{-webkit-text-size-adjust:100%;padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:14.5px;line-height:1.45;
+  padding-bottom:env(safe-area-inset-bottom,0px);-webkit-font-smoothing:antialiased;
+  background-image:radial-gradient(1200px 420px at 50% -120px,rgba(245,183,46,.06),transparent 70%)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.wrap{max-width:980px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.num{font-family:var(--f-num);font-variant-numeric:tabular-nums;letter-spacing:-.01em}
 [hidden]{display:none!important}
-.band{background:var(--band);color:var(--band-fg);position:sticky;top:env(safe-area-inset-top,0px);z-index:5}
-.band .wrap{padding-block:14px 0}
-.brand{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap}
-.brand h1{font-family:var(--f-display);font-weight:400;font-size:30px;letter-spacing:.02em;margin:0;line-height:1}
-.brand h1 span{color:var(--gold)}
-.brand small{color:var(--band-muted);font-size:12px;letter-spacing:.12em;text-transform:uppercase}
-.board{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin-top:12px;background:#ffffff14;border-radius:8px;overflow:hidden}
-.board div{background:var(--band);padding:8px 10px;min-width:0}
-.board b{display:block;font-family:var(--f-num);font-size:18px;font-weight:600;white-space:nowrap}
-.board span{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--band-muted)}
-.pos{color:#5fe0a0}.neg{color:#ff8d82}
-.tabs{display:flex;gap:2px;margin-top:12px}
-.tabs button{all:unset;cursor:pointer;padding:10px 11px 11px;font-weight:600;font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:var(--band-muted);border-bottom:3px solid transparent}
-.tabs button[aria-selected="true"]{color:var(--band-fg);border-color:var(--gold)}
-.tabs button:focus-visible{outline:2px solid var(--gold);outline-offset:-2px}
-main .wrap{padding-block:18px 48px;display:grid;gap:18px}
-h2{font-family:var(--f-display);font-weight:400;font-size:22px;letter-spacing:.03em;margin:0}
-.eyebrow{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600}
-.panel{background:var(--surface);border:1px solid var(--line);border-radius:10px}
-.note{color:var(--muted);font-size:13.5px}
-.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:space-between}
-.leaders{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-.leader{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px;min-width:0}
-.leader .who{font-weight:700;font-size:17px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.leader .what{font-family:var(--f-num);font-size:13px;color:var(--muted)}
-.stand{overflow:hidden}
-.srow{display:grid;grid-template-columns:28px minmax(0,1fr) 62px 56px 54px;gap:8px;align-items:center;padding:10px 12px;border-top:1px solid var(--line)}
-.srow:first-child{border-top:0}
-.srow.head{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600;padding-block:8px;background:var(--sunk)}
-.srow .rk{font-family:var(--f-display);font-size:20px;color:var(--muted)}
-.srow:nth-child(2) .rk{color:var(--gold)}
-.srow .nm{font-weight:700;font-size:16px;min-width:0}
-.srow .sub{display:flex;gap:10px;flex-wrap:wrap;font-size:12px;color:var(--muted);font-weight:500;margin-top:2px}
-.srow .r{text-align:right}
-.form{display:inline-flex;gap:3px;vertical-align:middle}
-.form i{width:8px;height:8px;border-radius:50%;background:var(--pend-bg);display:inline-block}
+
+/* ---------- Header ---------- */
+.band{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:rgba(7,9,12,.88);
+  backdrop-filter:saturate(140%) blur(12px);-webkit-backdrop-filter:saturate(140%) blur(12px);border-bottom:1px solid var(--line)}
+.band .wrap{padding-top:14px}
+.brand{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.logo{display:flex;align-items:baseline;gap:10px;min-width:0}
+.logo b{font-family:var(--f-display);font-weight:800;font-size:30px;line-height:1;letter-spacing:.01em;color:var(--gold)}
+.logo h1{font-family:var(--f-display);font-weight:700;font-size:19px;letter-spacing:.14em;text-transform:uppercase;margin:0;line-height:1;color:var(--fg)}
+.logo small{display:block;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-top:4px;font-weight:600}
+.sync{display:inline-flex;align-items:center;gap:7px;font-family:var(--f-num);font-size:11px;color:var(--muted);
+  border:1px solid var(--line-2);border-radius:999px;padding:5px 10px;background:var(--surface);white-space:nowrap}
+.sync i{width:6px;height:6px;border-radius:50%;background:var(--hit);box-shadow:0 0 0 3px var(--hit-bg)}
+.board{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:14px}
+.tile{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:10px 12px;min-width:0}
+.tile span{display:block;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.tile b{display:block;font-family:var(--f-num);font-size:20px;font-weight:600;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pos{color:var(--hit)}.neg{color:var(--miss)}
+.tabs{display:flex;gap:4px;margin-top:12px}
+.tabs button{all:unset;cursor:pointer;padding:10px 12px 11px;font-family:var(--f-display);font-weight:700;font-size:15px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);border-bottom:2px solid transparent;transition:color .15s}
+.tabs button:hover{color:var(--fg-2)}
+.tabs button[aria-selected="true"]{color:var(--fg);border-color:var(--gold)}
+.tabs button:focus-visible{outline:2px solid var(--gold);outline-offset:-2px;border-radius:4px}
+
+/* ---------- Layout ---------- */
+main .wrap{padding-block:20px 56px;display:grid;grid-template-columns:minmax(0,1fr);gap:20px}
+main .wrap>*{min-width:0}
+.sec-h{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+h2{font-family:var(--f-display);font-weight:700;font-size:22px;letter-spacing:.06em;text-transform:uppercase;margin:0}
+.eyebrow{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r)}
+.note{color:var(--muted);font-size:12.5px;margin:10px 2px 0}
+.note b{color:var(--fg-2);font-weight:600}
+.empty{padding:32px 18px;text-align:center;color:var(--muted)}
+
+/* ---------- Leader cards ---------- */
+.leaders{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.leader{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px 12px 16px;min-width:0;overflow:hidden}
+.leader::before{content:"";position:absolute;left:0;top:10px;bottom:10px;width:3px;border-radius:0 3px 3px 0;background:var(--k,var(--gold))}
+.leader .who{font-family:var(--f-display);font-weight:700;font-size:22px;letter-spacing:.02em;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.1}
+.leader .what{font-family:var(--f-num);font-size:12px;color:var(--fg-2);margin-top:2px}
+.leader.k-hot{--k:var(--hot)}.leader.k-cold{--k:var(--cold)}.leader.k-sharp{--k:var(--hit)}.leader.k-run{--k:var(--gold)}
+
+/* ---------- Tables (shared) ---------- */
+.tbl-wrap{position:relative;overflow-x:auto;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;border-radius:var(--r);
+  scrollbar-width:thin;scrollbar-color:var(--line-2) transparent}
+.tbl{width:100%;border-collapse:separate;border-spacing:0;min-width:620px}
+.tbl th,.tbl td{padding:11px 12px;border-top:1px solid var(--line);text-align:left;white-space:nowrap;background:var(--surface)}
+.tbl thead th{border-top:0;background:var(--surface-2);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600;padding-block:9px}
+.tbl tbody tr:hover td{background:var(--raise)}
+.tbl .r{text-align:right}.tbl .c{text-align:center}
+.tbl .stick{position:sticky;z-index:1}
+.tbl .c-rk{left:0;width:44px;min-width:44px;padding-right:4px}
+.tbl .c-nm{left:44px;min-width:150px}
+.tbl-wrap.scrolled .c-nm{box-shadow:8px 0 12px -8px rgba(0,0,0,.7)}
+.tbl-wrap.scrolled .c-nm::after{content:"";position:absolute;top:0;right:0;bottom:0;width:1px;background:var(--line-2)}
+.rk{font-family:var(--f-display);font-weight:700;font-size:18px;color:var(--dim)}
+tr.top1 .rk{color:var(--gold)} tr.top2 .rk,tr.top3 .rk{color:var(--fg-2)}
+.nm{font-weight:600;font-size:15px;color:var(--fg)}
+.nm-sub{display:flex;align-items:center;gap:8px;margin-top:3px;font-size:11.5px;color:var(--muted);font-weight:500}
+.form{display:inline-flex;gap:3px}
+.form i{width:7px;height:7px;border-radius:2px;background:var(--line-2)}
 .form i.h{background:var(--hit)}.form i.m{background:var(--miss)}
-.stk{display:inline-block;font-family:var(--f-num);font-weight:600;font-size:13px;padding:2px 7px;border-radius:5px;min-width:36px;text-align:center}
-.stk.w{background:var(--hit-bg);color:var(--hit)}.stk.l{background:var(--miss-bg);color:var(--miss)}.stk.z{background:var(--pend-bg);color:var(--pend)}
-.stack{display:grid;gap:12px}
+.tag-live{display:inline-flex;align-items:center;gap:5px;font-family:var(--f-num);font-size:10.5px;color:var(--live);font-weight:600}
+.tag-live i{width:5px;height:5px;border-radius:50%;background:var(--live)}
+.wl{font-weight:600;font-size:14px}
+.wl .w{color:var(--fg)}.wl .sep{color:var(--dim);margin:0 1px}.wl .l{color:var(--muted)}
+.pct{display:inline-flex;flex-direction:column;align-items:flex-end;gap:5px}
+.pct b{font-family:var(--f-num);font-weight:600;font-size:14px}
+.pct b.good{color:var(--hit)}.pct b.bad{color:var(--miss)}
+.bar{display:block;width:64px;height:3px;border-radius:2px;background:var(--line-2);overflow:hidden}
+.bar>span{display:block;height:100%;background:currentColor;border-radius:2px}
+.odds{font-weight:600;font-size:13.5px;color:var(--fg-2)}
+.quiet{font-family:var(--f-num);font-size:12px;color:var(--dim)}
+.quiet.on{color:var(--miss)}
+
+/* Streak badges */
+.streak{display:inline-flex;align-items:center;gap:6px;font-family:var(--f-num);font-weight:700;font-size:11.5px;letter-spacing:.04em;
+  padding:4px 9px;border-radius:999px;border:1px solid transparent;min-width:44px;justify-content:center}
+.streak.w{color:var(--hit);background:var(--hit-bg)}
+.streak.l{color:var(--miss);background:var(--miss-bg)}
+.streak.z{color:var(--dim);background:transparent;border-color:var(--line-2)}
+.streak.hot{color:var(--hot);background:var(--hot-bg);border-color:var(--hot-line)}
+.streak.cold{color:var(--cold);background:var(--cold-bg);border-color:var(--cold-line)}
+.streak svg{width:11px;height:11px;flex:none}
+
+/* ---------- Status pills (legs & slips) ---------- */
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  padding:5px 10px 5px 9px;border-radius:999px;border:1px solid;white-space:nowrap;line-height:1}
+.pill i{width:6px;height:6px;border-radius:50%;background:currentColor;flex:none}
+.pill.hit,.pill.won{color:var(--hit);background:var(--hit-bg);border-color:var(--hit-line)}
+.pill.miss,.pill.lost{color:var(--miss);background:var(--miss-bg);border-color:var(--miss-line)}
+.pill.pending,.pill.live{color:var(--live);background:var(--live-bg);border-color:var(--live-line)}
+.pill.void{color:var(--void);background:var(--void-bg);border-color:var(--void-line)}
+.pill.pending i,.pill.live i{animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(60,207,255,.55)}60%{box-shadow:0 0 0 5px rgba(60,207,255,0)}}
+@media (prefers-reduced-motion:reduce){.pill i{animation:none!important}}
+
+/* ---------- Players tab ---------- */
+.sorts{display:inline-flex;gap:2px;padding:3px;border:1px solid var(--line-2);border-radius:999px;background:var(--surface)}
+.sorts button{all:unset;cursor:pointer;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:6px 11px;border-radius:999px;color:var(--muted)}
+.sorts button[aria-pressed="true"]{background:var(--raise);color:var(--fg);box-shadow:inset 0 0 0 1px var(--line-2)}
+.sorts button:focus-visible{outline:2px solid var(--gold);outline-offset:1px}
+.tbl.plr{min-width:520px}
+.tbl.plr .c-nm{left:0;min-width:200px;white-space:normal}
+.by{font-size:11.5px;color:var(--muted);font-weight:500;margin-top:3px}
+
+/* ---------- Slips ---------- */
+.stack{display:grid;gap:14px}
 .slip{overflow:hidden}
-.slip-h{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;padding:12px 14px;border-bottom:1px dashed var(--line);flex-wrap:wrap}
-.slip-h .t{font-family:var(--f-display);font-size:20px;letter-spacing:.02em;line-height:1.1}
-.slip-h .m{font-size:13px;color:var(--muted)}
-.pill{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:4px 9px;border-radius:999px;white-space:nowrap}
-.pill.won{background:var(--hit-bg);color:var(--hit)}.pill.lost{background:var(--miss-bg);color:var(--miss)}.pill.live{background:var(--pend-bg);color:var(--pend)}
-.leg{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;padding:10px 14px;border-top:1px solid var(--line)}
+.slip-h{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:13px 16px;border-bottom:1px solid var(--line);background:var(--surface-2)}
+.slip-h .t{font-family:var(--f-display);font-weight:700;font-size:20px;letter-spacing:.04em;text-transform:uppercase;line-height:1.05}
+.slip-h .m{font-family:var(--f-num);font-size:11.5px;color:var(--muted);margin-top:3px}
+.segs{display:flex;gap:3px;margin-top:8px}
+.segs i{height:3px;flex:1;min-width:6px;max-width:26px;border-radius:2px;background:var(--line-2)}
+.segs i.hit{background:var(--hit)}.segs i.miss{background:var(--miss)}.segs i.pending{background:var(--live)}.segs i.void{background:var(--dim)}
+.leg{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:center;padding:12px 16px;border-top:1px solid var(--line)}
 .leg:first-of-type{border-top:0}
-.leg .who{font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--accent)}
-.leg .pk{font-weight:600}
-.leg .gm{font-size:12.5px;color:var(--muted)}
-.leg .act{font-size:12.5px;color:var(--muted);margin-top:2px}.leg .act.miss{color:var(--miss);font-weight:600}
-.res{font-weight:700;font-size:12px;letter-spacing:.1em;text-transform:uppercase;padding:7px 10px;border-radius:6px;min-width:58px;text-align:center}
-.res.hit{background:var(--hit-bg);color:var(--hit)}.res.miss{background:var(--miss-bg);color:var(--miss)}
-.res.pending{background:var(--pend-bg);color:var(--pend)}.res.void{background:var(--void-bg);color:var(--muted)}
-.slip-f{padding:10px 14px;background:var(--sunk);font-size:13px;color:var(--muted)}
-.empty{padding:28px 18px;text-align:center;color:var(--muted)}
-.rules{padding:14px;display:grid;gap:8px}
-.rules ol{margin:0;padding-left:20px;display:grid;gap:4px;font-weight:500}
-.prow{display:grid;grid-template-columns:minmax(0,1fr) 46px 62px 52px;gap:8px;align-items:center;padding:10px 12px;border-top:1px solid var(--line)}
-.prow:first-child{border-top:0}
-.prow.head{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600;padding-block:8px;background:var(--sunk)}
-.prow .nm{font-weight:700;font-size:16px;min-width:0}
-.prow .sub{font-size:12px;color:var(--muted);font-weight:500;margin-top:2px}
-.prow .r{text-align:right}
-.prow .w{color:var(--hit)}.prow .l{color:var(--miss)}
-.sorts{display:flex;gap:6px;flex-wrap:wrap}
-.sorts button{all:unset;cursor:pointer;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:6px 10px;border-radius:999px;border:1px solid var(--line);color:var(--muted);background:var(--surface)}
-.sorts button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
-.sorts button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
-.flag{font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--miss);background:var(--miss-bg);padding:2px 6px;border-radius:4px;margin-left:6px;white-space:nowrap}
-@media (max-width:420px){
-  .board b{font-size:15px}
-  .srow{grid-template-columns:22px minmax(0,1fr) 54px 48px 46px;gap:6px;padding-inline:10px}
+.leg.is-miss{background:linear-gradient(90deg,rgba(255,92,97,.06),transparent 55%)}
+.leg .who{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--gold)}
+.leg .pk{font-weight:600;font-size:14.5px;margin-top:2px;overflow-wrap:anywhere}
+.leg .od{font-family:var(--f-num);font-size:12px;color:var(--fg-2);font-weight:600;margin-left:6px;white-space:nowrap}
+.leg .gm{font-size:12px;color:var(--muted);margin-top:2px}
+.leg .act{font-size:12px;color:var(--muted);margin-top:3px}
+.leg .act.miss{color:var(--miss)}
+.flag{display:inline-block;font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);background:var(--gold-bg);
+  border:1px solid rgba(245,183,46,.3);padding:2px 6px;border-radius:4px;margin-left:6px;vertical-align:1px;white-space:nowrap}
+.slip-f{display:flex;justify-content:space-between;gap:10px;padding:10px 16px;border-top:1px solid var(--line);background:var(--surface-2);font-family:var(--f-num);font-size:12px;color:var(--muted)}
+.slip-f b{color:var(--fg-2);font-weight:600}
+.slip-f b.pos{color:var(--hit)}
+
+/* ---------- Rules / footer ---------- */
+.rules{padding:14px 16px}
+.rules ol{margin:8px 0 0;padding-left:18px;display:grid;gap:4px;color:var(--fg-2);font-size:13.5px}
+.foot{font-family:var(--f-num);font-size:11px;color:var(--dim);text-align:center;margin-top:4px}
+
+/* ---------- Responsive ---------- */
+@media (max-width:760px){
+  .leaders{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:520px){
+  .logo b{font-size:26px}.logo h1{font-size:16px}
+  .board{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+  .tile{padding:8px 10px}.tile b{font-size:17px}
+  .tabs button{padding-inline:10px;font-size:14px}
+  .tbl th,.tbl td{padding:10px 9px}
+  .tbl .c-rk{width:34px;min-width:34px}.tbl .c-nm{left:34px;min-width:132px}
+  .leader .who{font-size:19px}
+  .slip-h,.leg,.slip-f{padding-inline:13px}
 }
 </style>
 </head>
 <body>
 <header class="band">
   <div class="wrap">
-    <div class="brand"><h1>RAGS <span>TO</span> RICHES</h1><small>2026–27 NBA season</small></div>
+    <div class="brand">
+      <div class="logo"><b>RTR</b><div><h1>Rags to Riches</h1><small>2026–27 NBA · Group parlay</small></div></div>
+      <span class="sync" id="sync" hidden><i></i><span id="syncTxt"></span></span>
+    </div>
     <div class="board" aria-label="Group parlay record">
-      <div><b id="b-rec" class="num">0–0</b><span>Parlays</span></div>
-      <div><b id="b-legs" class="num">—</b><span>Leg hit rate</span></div>
-      <div><b id="b-net" class="num">$0</b><span>Net</span></div>
-      <div><b id="b-pot" class="num">$0</b><span>Could've won</span></div>
+      <div class="tile"><span>Parlays</span><b id="b-rec" class="num">0–0</b></div>
+      <div class="tile"><span>Leg hit rate</span><b id="b-legs" class="num">—</b></div>
+      <div class="tile"><span>Net</span><b id="b-net" class="num">$0</b></div>
+      <div class="tile"><span>Could've won</span><b id="b-pot" class="num">$0</b></div>
     </div>
     <nav class="tabs" role="tablist">
       <button role="tab" data-tab="standings" aria-selected="true">Standings</button>
@@ -127,33 +210,46 @@ h2{font-family:var(--f-display);font-weight:400;font-size:22px;letter-spacing:.0
     </nav>
   </div>
 </header>
+
 <main>
   <section class="wrap" data-view="standings">
     <div class="leaders" id="leaders"></div>
     <div>
-      <div class="row" style="margin-bottom:8px"><h2>Standings</h2><span class="eyebrow">Ranked by hit rate</span></div>
-      <div class="panel stand" id="standings"><div class="empty">Loading…</div></div>
-      <p class="note">Streak shows W for consecutive hits, L for consecutive misses. Sole bust counts slips where you were the only leg that missed.</p>
+      <div class="sec-h"><h2>Standings</h2><span class="eyebrow">Ranked by hit rate</span></div>
+      <div class="panel tbl-wrap" id="standWrap"><div class="empty">Loading…</div></div>
+      <p class="note"><b>Streak</b> counts consecutive graded hits (W) or misses (L) — <b>HOT</b>/<b>COLD</b> at 3+. <b>Avg odds</b> skips shared SGP prices. <b>SB</b> = sole busts, slips where that pick was the only miss.</p>
     </div>
     <div class="panel rules" id="rulesBox" hidden><h2>League rules</h2><ol id="rules"></ol></div>
-    <p class="note" id="updated"></p>
   </section>
+
   <section class="wrap" data-view="players" hidden>
-    <div class="row"><h2>NBA players &amp; teams</h2><div class="sorts" id="psort"><button type="button" data-s="hits" aria-pressed="true">Most hits</button><button type="button" data-s="misses" aria-pressed="false">Most misses</button><button type="button" data-s="picks" aria-pressed="false">Most picked</button></div></div>
-    <div class="panel stand" id="players"></div>
-    <p class="note">Every player or team the group has picked this season, with how often they came through. Live legs aren't counted until they're graded.</p>
+    <div>
+      <div class="sec-h"><h2>Players &amp; teams</h2>
+        <div class="sorts" id="psort"><button type="button" data-s="hits" aria-pressed="true">Most hits</button><button type="button" data-s="misses" aria-pressed="false">Most misses</button><button type="button" data-s="picks" aria-pressed="false">Most picked</button></div>
+      </div>
+      <div class="panel tbl-wrap" id="playersWrap"></div>
+      <p class="note">Every player or team the group has picked this season. Live legs aren't counted until they're graded.</p>
+    </div>
   </section>
+
   <section class="wrap" data-view="slips" hidden>
-    <div class="row"><h2>Slips</h2><span class="eyebrow" id="slipCount"></span></div>
-    <div id="slips" class="stack"></div>
+    <div>
+      <div class="sec-h"><h2>Slips</h2><span class="eyebrow" id="slipCount"></span></div>
+      <div id="slips" class="stack"></div>
+    </div>
   </section>
+
+  <div class="wrap"><p class="foot" id="updated"></p></div>
 </main>
+
 <script>
 (async function(){
   const $=s=>document.querySelector(s);
   const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
   const money=n=>(n<0?"-":"")+"$"+Math.abs(n).toFixed(2).replace(/\.00$/,"");
   const fmtDate=d=>{try{return new Date(d+"T12:00:00").toLocaleDateString(undefined,{weekday:"short",month:"short",day:"numeric"})}catch(e){return d}};
+
+  /* ---- tabs ---- */
   const views=["standings","players","slips"];
   function show(v){ if(!views.includes(v)) v="standings";
     document.querySelectorAll("[data-view]").forEach(s=>s.hidden=s.dataset.view!==v);
@@ -161,19 +257,27 @@ h2{font-family:var(--f-display);font-weight:400;font-size:22px;letter-spacing:.0
   document.querySelectorAll("[data-tab]").forEach(b=>b.onclick=()=>{ show(b.dataset.tab); history.replaceState(null,"","#"+b.dataset.tab); window.scrollTo(0,0); });
   show(location.hash.slice(1));
 
+  /* ---- sticky-column shadow on horizontal scroll ---- */
+  const watchScroll=el=>el.addEventListener("scroll",()=>el.classList.toggle("scrolled",el.scrollLeft>2),{passive:true});
+  watchScroll($("#standWrap")); watchScroll($("#playersWrap"));
+
+  /* ---- load data (schema unchanged) ---- */
   let data;
   try{ data = await (await fetch("data.json?v="+Date.now(),{cache:"no-store"})).json(); }
-  catch(e){ $("#standings").innerHTML=`<div class="empty">Couldn't load the standings. Refresh to try again.</div>`; return; }
+  catch(e){ $("#standWrap").innerHTML=`<div class="empty">Couldn't load the standings. Refresh to try again.</div>`; return; }
   const members=data.members||[], slips=data.slips||[], rules=data.rules||[];
   if(rules.length){ $("#rules").innerHTML=rules.map(r=>`<li>${esc(r)}</li>`).join(""); $("#rulesBox").hidden=false; }
+
+  /* ---- odds helpers ---- */
   const outOfRange=o=>{ const m=String(o||"").trim().match(/^([+-]\d+)$/); if(!m) return false; const n=+m[1]; return n<-250||n>250; };
   const impl=o=>{ const m=String(o||"").trim().match(/^([+-]?\d+)$/); if(!m) return null; const n=+m[1]; if(Math.abs(n)<100) return null; return n<0?-n/(-n+100):100/(n+100); };
   const toAm=q=>{ const n=q>=.5?-100*q/(1-q):100*(1-q)/q; const v=Math.round(n); return v>0?"+"+v:String(v); };
   const nameOf=id=>(members.find(m=>m.id===id)||{}).name||id;
   const status=p=>{const l=p.legs||[]; if(l.some(x=>x.result==="miss")) return "lost"; if(l.length&&l.every(x=>x.result==="hit"||x.result==="void")) return "won"; return "live";};
 
+  /* ---- per-member stats ---- */
   const sorted=[...slips].sort((a,b)=>(a.date||"").localeCompare(b.date||""));
-  const st={}; members.forEach(m=>st[m.id]={name:m.name,hits:0,misses:0,pending:0,seq:[],soleBust:0,probs:[]});
+  const st={}; members.forEach(m=>st[m.id]={id:m.id,name:m.name,hits:0,misses:0,pending:0,seq:[],soleBust:0,probs:[]});
   let won=0,lost=0,staked=0,ret=0,lh=0,lm=0,pot=0;
   for(const p of sorted){
     const s=status(p); pot+=Number(p.payout)||0;
@@ -181,30 +285,64 @@ h2{font-family:var(--f-display);font-weight:400;font-size:22px;letter-spacing:.0
     const misses=(p.legs||[]).filter(l=>l.result==="miss").length;
     for(const l of p.legs||[]){ const r=st[l.member]; if(!r) continue;
       const ip=impl(l.odds); if(ip!=null) r.probs.push(ip);
-      if(l.result==="hit"){r.hits++;r.seq.push("h");lh++} else if(l.result==="miss"){r.misses++;r.seq.push("m");lm++; if(misses===1) r.soleBust++} else if(l.result==="pending") r.pending++; }
+      if(l.result==="hit"){r.hits++;r.seq.push("h");lh++}
+      else if(l.result==="miss"){r.misses++;r.seq.push("m");lm++; if(misses===1) r.soleBust++}
+      else if(l.result==="pending") r.pending++; }
   }
   const rows=Object.values(st).map(r=>{ let run=0,best=0; for(const x of r.seq){run=x==="h"?run+1:0;best=Math.max(best,run)}
     let cur=0; const last=r.seq[r.seq.length-1]; for(let i=r.seq.length-1;i>=0&&r.seq[i]===last;i--) cur++;
-    const dec=r.hits+r.misses; return {...r,best,streak:last==="h"?cur:last==="m"?-cur:0,rate:dec?r.hits/dec:null,form:r.seq.slice(-5)}; })
+    const dec=r.hits+r.misses;
+    const avgOdds=r.probs.length?toAm(r.probs.reduce((a,b)=>a+b,0)/r.probs.length):null;
+    return {...r,best,streak:last==="h"?cur:last==="m"?-cur:0,rate:dec?r.hits/dec:null,form:r.seq.slice(-5),avgOdds}; })
     .sort((a,b)=>((b.rate??-1)-(a.rate??-1))||(b.hits-a.hits)||(a.misses-b.misses)||a.name.localeCompare(b.name));
 
+  /* ---- scoreboard ---- */
   $("#b-rec").textContent=`${won}–${lost}`;
   $("#b-legs").textContent=(lh+lm)?Math.round(100*lh/(lh+lm))+"%":"—";
   const net=ret-staked, nb=$("#b-net"); nb.textContent=(net>0?"+":"")+money(net); nb.className="num "+(net>0?"pos":net<0?"neg":"");
   $("#b-pot").textContent = pot>=10000 ? "$"+(pot/1000).toFixed(1)+"k" : "$"+Math.round(pot).toLocaleString();
+  if(data.updated){ try{
+    const d=new Date(data.updated);
+    $("#syncTxt").textContent="Synced "+d.toLocaleString(undefined,{month:"short",day:"numeric",hour:"numeric",minute:"2-digit"});
+    $("#sync").hidden=false;
+    $("#updated").textContent="Last updated "+d.toLocaleString(undefined,{weekday:"short",month:"short",day:"numeric",hour:"numeric",minute:"2-digit"});
+  }catch(e){} }
 
-  const stk=r=>r.streak>0?`<span class="stk w">W${r.streak}</span>`:r.streak<0?`<span class="stk l">L${-r.streak}</span>`:`<span class="stk z">–</span>`;
-  const form=r=>`<span class="form" aria-label="Last five">${Array.from({length:5},(_,i)=>`<i class="${r.form[r.form.length-5+i]||""}"></i>`).join("")}</span>`;
-  $("#standings").innerHTML=`<div class="srow head"><span>#</span><span>Name</span><span class="r">W–L</span><span class="r">Hit%</span><span class="r">Strk</span></div>`+
-    rows.map((r,i)=>`<div class="srow"><span class="rk">${i+1}</span><div class="nm">${esc(r.name)} ${form(r)}<div class="sub"><span>Best W${r.best}</span><span>Sole bust ${r.soleBust}</span>${r.probs.length?`<span title="Average odds across ${r.probs.length} picks">Avg odds ${toAm(r.probs.reduce((a,b)=>a+b,0)/r.probs.length)}</span>`:""}${r.pending?`<span>${r.pending} live</span>`:""}</div></div>
-      <span class="r num">${r.hits}–${r.misses}</span><span class="r num">${r.rate==null?"—":Math.round(r.rate*100)+"%"}</span><span class="r">${stk(r)}</span></div>`).join("");
+  /* ---- standings table ---- */
+  const flame=`<svg viewBox="0 0 12 12" aria-hidden="true"><path fill="currentColor" d="M6.3.6c.3 1.9-.6 2.9-1.5 3.9C3.9 5.5 3 6.5 3 8a3 3 0 0 0 6 0c0-1-.4-1.8-.9-2.5-.1.8-.5 1.4-1.1 1.6.4-1.9-.1-4.6-.7-6.5Z"/></svg>`;
+  const flake=`<svg viewBox="0 0 12 12" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" d="M6 .8v10.4M1.5 3.4l9 5.2M1.5 8.6l9-5.2M4.6 1.8 6 3l1.4-1.2M4.6 10.2 6 9l1.4 1.2"/></svg>`;
+  const streak=r=> r.streak>=3  ? `<span class="streak hot" title="${r.streak} straight hits">${flame}HOT W${r.streak}</span>`
+                 : r.streak<=-3 ? `<span class="streak cold" title="${-r.streak} straight misses">${flake}COLD L${-r.streak}</span>`
+                 : r.streak>0   ? `<span class="streak w">W${r.streak}</span>`
+                 : r.streak<0   ? `<span class="streak l">L${-r.streak}</span>`
+                 : `<span class="streak z">—</span>`;
+  const form=r=>`<span class="form" aria-label="Last five graded picks">${Array.from({length:5},(_,i)=>`<i class="${r.form[r.form.length-5+i]||""}"></i>`).join("")}</span>`;
+  const pct=r=>{ if(r.rate==null) return `<span class="quiet">—</span>`; const v=Math.round(r.rate*100), cls=v>=60?"good":v<40?"bad":"";
+    return `<span class="pct"><b class="${cls}">${v}%</b><span class="bar" style="color:var(${cls==="good"?"--hit":cls==="bad"?"--miss":"--fg-2"})"><span style="width:${v}%"></span></span></span>`; };
 
+  $("#standWrap").innerHTML=`<table class="tbl stand"><thead><tr>
+      <th class="stick c-rk">#</th><th class="stick c-nm">Name</th><th class="r">Record</th><th class="r">Hit %</th><th class="r">Avg odds</th><th class="c">Streak</th>
+      <th class="r" title="Sole busts — slips where this pick was the only miss">SB</th></tr></thead><tbody>`+
+    rows.map((r,i)=>`<tr class="${i<3?"top"+(i+1):""}">
+      <td class="stick c-rk"><span class="rk">${i+1}</span></td>
+      <td class="stick c-nm"><div class="nm">${esc(r.name)}</div><div class="nm-sub">${form(r)}${r.best?`<span>Best W${r.best}</span>`:""}${r.pending?`<span class="tag-live"><i></i>${r.pending} live</span>`:""}</div></td>
+      <td class="r"><span class="wl num"><span class="w">${r.hits}</span><span class="sep">–</span><span class="l">${r.misses}</span></span></td>
+      <td class="r">${pct(r)}</td>
+      <td class="r">${r.avgOdds?`<span class="odds num" title="Average across ${r.probs.length} priced picks">${r.avgOdds}</span>`:`<span class="quiet">—</span>`}</td>
+      <td class="c">${streak(r)}</td>
+      <td class="r"><span class="quiet${r.soleBust?" on":""}">${r.soleBust}</span></td>
+    </tr>`).join("")+`</tbody></table>`;
+
+  /* ---- leader cards ---- */
   const dec=rows.filter(r=>r.hits+r.misses>0), pick=(a,f)=>a.length?a.reduce((x,y)=>f(y)>f(x)?y:x):null;
-  const L=(lbl,r,t)=>`<div class="leader"><div class="eyebrow">${lbl}</div><div class="who">${r?esc(r.name):"—"}</div><div class="what">${r?t(r):"Waiting on results"}</div></div>`;
-  $("#leaders").innerHTML=L("On fire",pick(dec.filter(r=>r.streak>0),r=>r.streak),r=>`${r.streak} straight hits`)+L("Ice cold",pick(dec.filter(r=>r.streak<0),r=>-r.streak),r=>`${-r.streak} straight misses`)+
-    L("Sharpest (3+ picks)",pick(dec.filter(r=>r.hits+r.misses>=3),r=>r.rate),r=>`${Math.round(r.rate*100)}% · ${r.hits}–${r.misses}`)+L("Parlay killer",pick(dec.filter(r=>r.soleBust>0),r=>r.soleBust),r=>`Sole bust ×${r.soleBust}`);
+  const L=(k,lbl,r,t)=>`<div class="leader k-${k}"><div class="eyebrow">${lbl}</div><div class="who">${r?esc(r.name):"—"}</div><div class="what">${r?t(r):"Waiting on results"}</div></div>`;
+  $("#leaders").innerHTML=
+     L("hot","On fire",pick(dec.filter(r=>r.streak>0),r=>r.streak),r=>`W${r.streak} · ${r.streak} straight hits`)
+    +L("cold","Ice cold",pick(dec.filter(r=>r.streak<0),r=>-r.streak),r=>`L${-r.streak} · ${-r.streak} straight misses`)
+    +L("sharp","Sharpest · 3+ picks",pick(dec.filter(r=>r.hits+r.misses>=3),r=>r.rate),r=>`${Math.round(r.rate*100)}% · ${r.hits}–${r.misses}`)
+    +L("run","Season-best run",pick(dec.filter(r=>r.best>0),r=>r.best),r=>`W${r.best} longest heater`);
 
-  // players tab
+  /* ---- players tab ---- */
   const guessPlayer=p=>String(p||"").replace(/\s+(ML|moneyline|under|over|to\b|\d).*$/i,"").trim();
   const P={};
   for(const p of sorted) for(const l of p.legs||[]){
@@ -217,24 +355,38 @@ h2{font-family:var(--f-display);font-weight:400;font-size:22px;letter-spacing:.0
   let psort="hits";
   function renderPlayers(){
     const f={hits:(a,b)=>(b.hits-a.hits)||(a.misses-b.misses), misses:(a,b)=>(b.misses-a.misses)||(a.hits-b.hits), picks:(a,b)=>((b.hits+b.misses+b.live)-(a.hits+a.misses+a.live))||(b.hits-a.hits)}[psort];
-    const rows=[...plist].sort((a,b)=>f(a,b)||a.name.localeCompare(b.name));
-    $("#players").innerHTML = rows.length ? `<div class="prow head"><span>Player / team</span><span class="r">Picks</span><span class="r">Hit–Miss</span><span class="r">Hit%</span></div>`+
-      rows.map(r=>{const dec=r.hits+r.misses, by=Object.entries(r.by).map(([m,n])=>nameOf(m)+(n>1?` ×${n}`:"")).join(", ");
-        return `<div class="prow"><div class="nm">${esc(r.name)}<div class="sub">Picked by ${esc(by)}${r.live?` · ${r.live} live`:""}</div></div>
-        <span class="r num">${r.hits+r.misses+r.live}</span><span class="r num"><span class="w">${r.hits}</span>–<span class="l">${r.misses}</span></span><span class="r num">${dec?Math.round(100*r.hits/dec)+"%":"—"}</span></div>`}).join("")
+    const list=[...plist].sort((a,b)=>f(a,b)||a.name.localeCompare(b.name));
+    $("#playersWrap").innerHTML = list.length ? `<table class="tbl plr"><thead><tr><th class="stick c-nm">Player / team</th><th class="r">Picks</th><th class="r">Hit–Miss</th><th class="r">Hit %</th></tr></thead><tbody>`+
+      list.map(r=>{const d=r.hits+r.misses, by=Object.entries(r.by).map(([m,n])=>nameOf(m)+(n>1?` ×${n}`:"")).join(", ");
+        return `<tr><td class="stick c-nm"><div class="nm">${esc(r.name)}</div><div class="by">Picked by ${esc(by)}${r.live?` · <span class="tag-live"><i></i>${r.live} live</span>`:""}</div></td>
+          <td class="r num">${r.hits+r.misses+r.live}</td>
+          <td class="r"><span class="wl num"><span class="w" style="color:var(--hit)">${r.hits}</span><span class="sep">–</span><span class="l" style="color:var(--miss)">${r.misses}</span></span></td>
+          <td class="r">${pct({rate:d?r.hits/d:null})}</td></tr>`}).join("")+`</tbody></table>`
       : `<div class="empty">No picks yet.</div>`;
     document.querySelectorAll("#psort button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.s===psort));
   }
   $("#psort").onclick=e=>{const b=e.target.closest("button"); if(!b) return; psort=b.dataset.s; renderPlayers();};
   renderPlayers();
 
+  /* ---- slips tab ---- */
+  const legLabel={hit:"Hit",miss:"Miss",pending:"Live",void:"Void"};
+  const slipLabel={won:"Cashed",lost:"Busted",live:"Live"};
   const rev=[...slips].sort((a,b)=>(b.date||"").localeCompare(a.date||""));
   $("#slipCount").textContent=`${slips.length} slip${slips.length===1?"":"s"}`;
-  $("#slips").innerHTML=rev.map(p=>{const s=status(p),legs=p.legs||[],h=legs.filter(l=>l.result==="hit").length;
-    return `<article class="panel slip"><div class="slip-h"><div><div class="t">${esc(fmtDate(p.date))}</div><div class="m">${legs.length}-leg · ${h}/${legs.length} hit</div></div><span class="pill ${s}">${s==="won"?"Cashed":s==="lost"?"Busted":"Live"}</span></div>
-    ${legs.map(l=>`<div class="leg"><div style="min-width:0"><div class="who">${esc(nameOf(l.member))}</div><div class="pk">${esc(l.pick)}${l.odds?` <span class="num gm">${esc(l.odds)}</span>`:""}${outOfRange(l.odds)?`<span class="flag">Outside -250/+250</span>`:""}</div>${l.game?`<div class="gm">${esc(l.game)}</div>`:""}${l.actual?`<div class="act ${esc(l.result)}">${esc(l.actual)}</div>`:""}</div><span class="res ${esc(l.result)}">${l.result==="pending"?"Live":esc(l.result)}</span></div>`).join("")}
-    <div class="slip-f num">${money(Number(p.stake)||0)} to win ${money(Number(p.payout)||0)}</div></article>`}).join("")||`<div class="panel empty">No slips yet.</div>`;
-  if(data.updated){ try{ $("#updated").textContent="Last updated "+new Date(data.updated).toLocaleString(undefined,{weekday:"short",month:"short",day:"numeric",hour:"numeric",minute:"2-digit"}); }catch(e){} }
+  $("#slips").innerHTML=rev.map(p=>{const s=status(p),legs=p.legs||[],h=legs.filter(l=>l.result==="hit").length,lv=legs.filter(l=>l.result==="pending").length;
+    return `<article class="panel slip">
+      <div class="slip-h"><div style="min-width:0"><div class="t">${esc(fmtDate(p.date))}</div>
+        <div class="m">${legs.length}-leg · ${h}/${legs.length} hit${lv?` · ${lv} live`:""}</div>
+        <div class="segs" aria-hidden="true">${legs.map(l=>`<i class="${esc(l.result)}"></i>`).join("")}</div></div>
+        <span class="pill ${s}"><i></i>${slipLabel[s]}</span></div>
+      ${legs.map(l=>`<div class="leg${l.result==="miss"?" is-miss":""}"><div style="min-width:0">
+          <div class="who">${esc(nameOf(l.member))}</div>
+          <div class="pk">${esc(l.pick)}${l.odds?`<span class="od">${esc(l.odds)}</span>`:""}${outOfRange(l.odds)?`<span class="flag">Outside ±250</span>`:""}</div>
+          ${l.game?`<div class="gm">${esc(l.game)}</div>`:""}
+          ${l.actual?`<div class="act ${esc(l.result)}">${esc(l.actual)}</div>`:""}
+        </div><span class="pill ${esc(l.result)}"><i></i>${legLabel[l.result]||esc(l.result)}</span></div>`).join("")}
+      <div class="slip-f"><span>Stake <b>${money(Number(p.stake)||0)}</b></span><span>${s==="won"?"Paid":"To win"} <b class="${s==="won"?"pos":""}">${money(Number(p.payout)||0)}</b></span></div>
+    </article>`}).join("")||`<div class="panel empty">No slips yet.</div>`;
 })();
 </script>
 </body>
